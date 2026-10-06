@@ -367,3 +367,38 @@ document.addEventListener(
 
   }
 );
+
+/* =========================================================
+   SECTION 02 — THE HOOK INTERACTION
+========================================================= */
+
+const hookCards =
+  document.querySelectorAll(".hook-card");
+
+hookCards.forEach(card => {
+
+  card.addEventListener("mousemove", event => {
+
+    const rect =
+      card.getBoundingClientRect();
+
+    const x =
+      ((event.clientX - rect.left) / rect.width - .5) * 2;
+
+    const y =
+      ((event.clientY - rect.top) / rect.height - .5) * 2;
+
+    card.style.transform =
+      `translate(${x * 3}px, ${y * 3}px)`;
+
+  });
+
+
+  card.addEventListener("mouseleave", () => {
+
+    card.style.transform =
+      "translate(0, 0)";
+
+  });
+
+});
