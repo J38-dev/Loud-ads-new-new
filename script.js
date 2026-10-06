@@ -86,6 +86,17 @@ updateHeroScroll();
    HERO MOUSE MOVEMENT
 ========================================================= */
 
+/* =========================================================
+   HERO MOUSE MOVEMENT
+========================================================= */
+
+const heroTitle =
+  document.querySelector(".hero-title-accent");
+
+const heroCode =
+  document.querySelector(".hero-code");
+
+
 if (
   hero &&
   heroLogo &&
@@ -110,6 +121,8 @@ if (
         .5;
 
 
+      /* LOGO MOVEMENT */
+
       heroLogo.style.setProperty(
         "--logo-x",
         `${x * 12}px`
@@ -119,6 +132,73 @@ if (
         "--logo-y",
         `${y * 8}px`
       );
+
+
+      /* GRID MOVEMENT */
+
+      heroGrid.style.setProperty(
+        "--grid-x",
+        `${x * 14}px`
+      );
+
+
+      /* POINTER POSITION */
+
+      hero.style.setProperty(
+        "--pointer-x",
+        `${(x + .5) * 100}%`
+      );
+
+      hero.style.setProperty(
+        "--pointer-y",
+        `${(y + .5) * 100}%`
+      );
+
+
+      /* HEADLINE INTERACTION */
+
+      if (heroTitle) {
+
+        const titleRect =
+          heroTitle.getBoundingClientRect();
+
+        const distanceX =
+          event.clientX - (
+            titleRect.left +
+            titleRect.width / 2
+          );
+
+        const distanceY =
+          event.clientY - (
+            titleRect.top +
+            titleRect.height / 2
+          );
+
+        const distance =
+          Math.sqrt(
+            distanceX * distanceX +
+            distanceY * distanceY
+          );
+
+        heroTitle.classList.toggle(
+          "is-active",
+          distance < 220
+        );
+
+      }
+
+
+      /* CODE → VISUAL */
+
+      if (heroCode) {
+
+        heroCode.classList.toggle(
+          "is-active",
+          Math.abs(x) < .25 &&
+          Math.abs(y) < .25
+        );
+
+      }
 
     }
   );
@@ -137,6 +217,34 @@ if (
         "--logo-y",
         "0px"
       );
+
+      heroGrid.style.setProperty(
+        "--grid-x",
+        "0px"
+      );
+
+      hero.style.setProperty(
+        "--pointer-x",
+        "50%"
+      );
+
+      hero.style.setProperty(
+        "--pointer-y",
+        "50%"
+      );
+
+
+      if (heroTitle) {
+        heroTitle.classList.remove(
+          "is-active"
+        );
+      }
+
+      if (heroCode) {
+        heroCode.classList.remove(
+          "is-active"
+        );
+      }
 
     }
   );
