@@ -975,7 +975,9 @@ position: relative;
    
 
   
-   /* =========================================================
+
+
+/* =========================================================
    SECTION 02 — THE HOOK
 ========================================================= */
 
@@ -1062,7 +1064,8 @@ position: relative;
 .hook-heading h2 {
   margin: 0;
 
-  font-size: clamp(58px, 8vw, 120px);
+  font-size:
+    clamp(58px, 8vw, 120px);
 
   line-height: .84;
 
@@ -1079,7 +1082,7 @@ position: relative;
 
 
 /* =========================================================
-   CARD GRID
+   GRID
 ========================================================= */
 
 .hook-grid {
@@ -1102,7 +1105,7 @@ position: relative;
   position: relative;
 
   width: 100%;
-  min-height: 330px;
+  min-height: 360px;
 
   padding: 30px;
 
@@ -1125,9 +1128,8 @@ position: relative;
   font: inherit;
 
   transition:
-    background .35s var(--ease),
-    transform .35s var(--ease),
-    opacity .35s var(--ease);
+    background .45s var(--ease),
+    transform .45s var(--ease);
 }
 
 
@@ -1149,29 +1151,15 @@ position: relative;
 
 
 /* =========================================================
-   FOCUS
-========================================================= */
-
-.hook-card:focus {
-  outline: none;
-}
-
-.hook-card:focus-visible {
-  outline: 2px solid var(--red);
-  outline-offset: -2px;
-}
-
-
-/* =========================================================
-   ACTIVE CARD
+   ACTIVE
 ========================================================= */
 
 .hook-card.active {
   background:
-    rgba(220, 20, 60, .15);
+    rgba(220, 20, 60, .14);
 
   transform:
-    translateY(-3px);
+    translateY(-4px);
 }
 
 
@@ -1195,15 +1183,26 @@ position: relative;
 
 
 /* =========================================================
-   MAIN CARD CONTENT
+   DEFAULT CARD
 ========================================================= */
 
-.hook-card-content {
+.hook-card-default {
   position: absolute;
 
   left: 30px;
   right: 30px;
   bottom: 30px;
+
+  transition:
+    opacity .3s var(--ease),
+    transform .45s var(--ease);
+}
+
+.hook-card.active .hook-card-default {
+  opacity: 0;
+
+  transform:
+    translateY(25px);
 }
 
 
@@ -1216,8 +1215,6 @@ position: relative;
 
   margin-bottom: 14px;
 
-  color: var(--black);
-
   font-size: 9px;
   font-weight: 800;
 
@@ -1226,17 +1223,13 @@ position: relative;
 
 
 /* =========================================================
-   CARD HEADLINE
+   MAIN HEADLINE
 ========================================================= */
 
-.hook-card-content strong {
+.hook-card-default strong {
   display: block;
 
   margin: 0;
-
-  max-width: 600px;
-
-  color: var(--black);
 
   font-size:
     clamp(40px, 4.8vw, 70px);
@@ -1248,7 +1241,7 @@ position: relative;
   font-weight: 800;
 }
 
-.hook-card-content strong span {
+.hook-card-default strong span {
   display: block;
 
   color: var(--red);
@@ -1256,7 +1249,7 @@ position: relative;
 
 
 /* =========================================================
-   DIVIDER
+   DEFAULT LINE
 ========================================================= */
 
 .hook-line {
@@ -1269,24 +1262,11 @@ position: relative;
 
   background:
     rgba(0, 0, 0, .16);
-
-  transform-origin: left;
-
-  transition:
-    transform .4s var(--ease),
-    background .3s var(--ease);
-}
-
-.hook-card.active .hook-line {
-  background: var(--red);
-
-  transform:
-    scaleX(.35);
 }
 
 
 /* =========================================================
-   CARD ACTION
+   DEFAULT LINK
 ========================================================= */
 
 .hook-card-link {
@@ -1309,11 +1289,7 @@ position: relative;
   font-size: 18px;
 
   transition:
-    transform .35s var(--ease);
-}
-
-.hook-card.active .hook-card-link {
-  color: var(--black);
+    transform .4s var(--ease);
 }
 
 .hook-card.active .hook-card-link b {
@@ -1323,43 +1299,33 @@ position: relative;
 
 
 /* =========================================================
-   REVEALED DETAILS
+   ACTIVE CARD CONTENT
 ========================================================= */
 
-.hook-card-detail {
+.hook-card-active {
   position: absolute;
 
-  top: 28px;
-  right: 30px;
+  inset: 30px;
 
   display: flex;
 
   flex-direction: column;
 
-  gap: 8px;
-
-  color: var(--red);
-
-  font-size: 8px;
-  font-weight: 800;
-
-  letter-spacing: .1em;
-
-  text-align: right;
+  justify-content: space-between;
 
   opacity: 0;
 
   transform:
-    translateY(-10px);
+    translateY(25px);
 
   pointer-events: none;
 
   transition:
-    opacity .35s var(--ease),
-    transform .35s var(--ease);
+    opacity .4s var(--ease),
+    transform .45s var(--ease);
 }
 
-.hook-card.active .hook-card-detail {
+.hook-card.active .hook-card-active {
   opacity: 1;
 
   transform:
@@ -1368,7 +1334,141 @@ position: relative;
 
 
 /* =========================================================
-   SELECTED STATE
+   ACTIVE LABEL
+========================================================= */
+
+.hook-card-active-label {
+  color: var(--red);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: .16em;
+}
+
+
+/* =========================================================
+   ACTIVE HEADLINE
+========================================================= */
+
+.hook-card-active strong {
+  margin: 0;
+
+  font-size:
+    clamp(38px, 4.5vw, 64px);
+
+  line-height: .88;
+
+  letter-spacing: -.065em;
+
+  font-weight: 800;
+}
+
+.hook-card-active strong span {
+  display: block;
+
+  color: var(--red);
+}
+
+
+/* =========================================================
+   PROCESS STEPS
+========================================================= */
+
+.hook-steps {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 1px;
+
+  background:
+    rgba(220, 20, 60, .35);
+
+  border-top:
+    1px solid var(--red);
+
+  border-bottom:
+    1px solid var(--red);
+}
+
+.hook-step {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+
+  padding: 14px 10px;
+
+  background:
+    rgba(245, 245, 243, .55);
+
+  color: #777;
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: .12em;
+}
+
+.hook-step b {
+  color: #aaa;
+
+  font-size: 8px;
+}
+
+.hook-step.active {
+  color: var(--black);
+
+  background:
+    rgba(220, 20, 60, .12);
+}
+
+.hook-step.active b {
+  color: var(--red);
+}
+
+
+/* =========================================================
+   ACTIVE BOTTOM
+========================================================= */
+
+.hook-active-bottom {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding-top: 16px;
+
+  border-top:
+    1px solid rgba(0, 0, 0, .15);
+
+  color: #666;
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: .1em;
+}
+
+.hook-active-bottom > span:last-child {
+  color: var(--black);
+}
+
+.hook-active-bottom b {
+  color: var(--red);
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   SELECTED / UNSELECTED
 ========================================================= */
 
 .hook-grid.has-selection
@@ -1400,13 +1500,30 @@ position: relative;
 
 
 /* =========================================================
+   FOCUS
+========================================================= */
+
+.hook-card:focus {
+  outline: none;
+}
+
+.hook-card:focus-visible {
+  outline:
+    2px solid var(--red);
+
+  outline-offset: -2px;
+}
+
+
+/* =========================================================
    MOBILE
 ========================================================= */
 
 @media (max-width: 600px) {
 
   .hook-section {
-    padding: 70px 20px 30px;
+    padding:
+      70px 20px 30px;
   }
 
   .hook-status {
@@ -1418,7 +1535,8 @@ position: relative;
   }
 
   .hook-heading {
-    padding: 30px 0 35px;
+    padding:
+      30px 0 35px;
   }
 
   .hook-intro {
@@ -1437,7 +1555,7 @@ position: relative;
 
 
   .hook-card {
-    min-height: 290px;
+    min-height: 350px;
 
     padding: 25px;
   }
@@ -1455,30 +1573,44 @@ position: relative;
   }
 
 
-  .hook-card-content {
+  .hook-card-default {
     left: 25px;
     right: 25px;
     bottom: 25px;
   }
 
 
-  .hook-card-content strong {
+  .hook-card-default strong {
     font-size:
       clamp(37px, 11vw, 55px);
-
-    line-height: .9;
   }
 
 
-  .hook-line {
-    margin:
-      23px 0 14px;
+  .hook-card-active {
+    inset: 25px;
   }
 
 
-  .hook-card-detail {
-    top: 23px;
-    right: 25px;
+  .hook-card-active strong {
+    font-size:
+      clamp(35px, 10vw, 52px);
+  }
+
+
+  .hook-step {
+    padding:
+      12px 8px;
+
+    font-size: 7px;
+  }
+
+
+  .hook-active-bottom {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 10px;
 
     font-size: 7px;
   }
@@ -1489,20 +1621,3 @@ position: relative;
   }
 
 }
-
-
-/* =========================================================
-   SMALL PHONES
-========================================================= */
-
-@media (max-width: 380px) {
-
-  .hook-heading h2 {
-    font-size: 46px;
-  }
-
-  .hook-card-content strong {
-    font-size: 35px;
-  }
-
-   }
