@@ -411,21 +411,66 @@ hookCards.forEach(card => {
 const hookCards =
   document.querySelectorAll(".hook-card");
 
+
 hookCards.forEach(card => {
+
+  card.addEventListener("click", () => {
+
+    const isActive =
+      card.classList.contains("active");
+
+
+    hookCards.forEach(otherCard => {
+
+      otherCard.classList.remove("active");
+
+      otherCard.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+    });
+
+
+    if (!isActive) {
+
+      card.classList.add("active");
+
+      card.setAttribute(
+        "aria-expanded",
+        "true"
+      );
+
+    }
+
+  });
+
+
+  /* DESKTOP MICRO-MOVEMENT */
 
   card.addEventListener("mousemove", event => {
 
-    const rect =
-      card.getBoundingClientRect();
+    if (
+      window.matchMedia("(pointer: fine)").matches
+    ) {
 
-    const x =
-      ((event.clientX - rect.left) / rect.width - .5) * 2;
+      const rect =
+        card.getBoundingClientRect();
 
-    const y =
-      ((event.clientY - rect.top) / rect.height - .5) * 2;
+      const x =
+        (event.clientX - rect.left) /
+        rect.width -
+        .5;
 
-    card.style.transform =
-      `translate(${x * 3}px, ${y * 3}px)`;
+      const y =
+        (event.clientY - rect.top) /
+        rect.height -
+        .5;
+
+      card.style.transform =
+        `translate(${x * 2}px, ${y * 2}px)`;
+
+    }
 
   });
 
