@@ -161,215 +161,649 @@
 
     
 <!-- ================================
-     SECTION 02 — THE HOOK
+     SECTION 02 — START A PROJECT
 ================================= -->
 
-<section class="hook-section" id="about">
+<section class="project-section" id="services">
 
-  <div class="hook-inner">
+  <div class="project-inner">
 
-    <div class="hook-top">
+    <!-- TOP BAR -->
 
-      <span class="hook-label">
-        02 — THE IDEA
+    <div class="project-top">
+
+      <span class="project-label">
+        02 — START A PROJECT
       </span>
 
-      <span class="hook-status">
-        <i></i>
-        LOUD ADS / DIGITAL
+      <span class="project-progress">
+        <span id="projectStep">01</span> / 05
       </span>
 
     </div>
 
 
-    <div class="hook-heading">
+    <!-- INTRO -->
 
-      <p class="hook-intro">
-        Good design gets attention.
-        Good websites keep it.
+    <div class="project-heading">
+
+      <p class="project-intro">
+        Tell us where you're going.
+        We'll help shape the direction.
       </p>
 
       <h2>
-        We make brands
-        <span>stand out.</span>
+        What are we
+        <span>making?</span>
       </h2>
 
     </div>
 
 
-    <div class="hook-grid">
+    <!-- PROJECT BUILDER -->
+
+    <div class="project-builder">
 
 
-      <!-- DESIGN -->
+      <!-- =================================
+           STEP 01 — SERVICE
+      ================================== -->
 
-      <button
-        class="hook-card"
-        type="button"
-        data-hook="design"
-        aria-expanded="false"
+      <div
+        class="project-step active"
+        data-step="1"
       >
 
-        <span class="hook-card-number">
-          01
-        </span>
+        <div class="project-question">
 
-
-        <span class="hook-card-default">
-
-          <span class="hook-card-type">
-            DESIGN
+          <span class="project-question-number">
+            01
           </span>
 
-          <strong>
-            Make them
-            <span>look twice.</span>
-          </strong>
-
-          <span class="hook-line"></span>
-
-          <span class="hook-card-link">
-            TAP TO EXPLORE
-            <b>↗</b>
+          <span class="project-question-label">
+            CHOOSE YOUR DIRECTION
           </span>
 
-        </span>
+        </div>
 
 
-        <span class="hook-card-active">
+        <div class="project-options service-options">
 
-          <span class="hook-card-active-label">
-            THE DESIGN PROCESS
-          </span>
+          <button
+            type="button"
+            class="project-option service-option"
+            data-service="design"
+          >
 
-          <strong>
-            Make your
-            <span>brand visible.</span>
-          </strong>
-
-          <span class="hook-steps">
-
-            <span class="hook-step active">
-              <b>01</b>
-              MAKE
+            <span class="project-option-number">
+              01
             </span>
 
-            <span class="hook-step">
-              <b>02</b>
-              BUILD
+            <span class="project-option-content">
+
+              <span class="project-option-type">
+                DESIGN
+              </span>
+
+              <strong>
+                Make them
+                <span>look twice.</span>
+              </strong>
+
+              <small>
+                Branding, social, promotion
+                and visual design.
+              </small>
+
             </span>
 
-            <span class="hook-step">
-              <b>03</b>
-              LAUNCH
+            <span class="project-option-arrow">
+              ↗
             </span>
 
-          </span>
+          </button>
 
-          <span class="hook-active-bottom">
 
-            <span>
-              LOGOS · SOCIAL · PROMOTIONAL
+          <button
+            type="button"
+            class="project-option service-option"
+            data-service="web"
+          >
+
+            <span class="project-option-number">
+              02
             </span>
 
-            <span>
-              START DESIGN <b>→</b>
+            <span class="project-option-content">
+
+              <span class="project-option-type">
+                WEB
+              </span>
+
+              <strong>
+                Make them
+                <span>stay longer.</span>
+              </strong>
+
+              <small>
+                Business websites, landing pages
+                and digital experiences.
+              </small>
+
             </span>
 
-          </span>
+            <span class="project-option-arrow">
+              ↗
+            </span>
 
-        </span>
+          </button>
 
-      </button>
+        </div>
+
+      </div>
 
 
-      <!-- WEB -->
+      <!-- =================================
+           STEP 02 — PROJECT TYPE
+      ================================== -->
 
-      <button
-        class="hook-card"
-        type="button"
-        data-hook="web"
-        aria-expanded="false"
+      <div
+        class="project-step"
+        data-step="2"
       >
 
-        <span class="hook-card-number">
-          02
-        </span>
+        <div class="project-question">
 
-
-        <span class="hook-card-default">
-
-          <span class="hook-card-type">
-            WEB
+          <span class="project-question-number">
+            02
           </span>
 
-          <strong>
-            Make them
-            <span>stay longer.</span>
-          </strong>
-
-          <span class="hook-line"></span>
-
-          <span class="hook-card-link">
-            TAP TO EXPLORE
-            <b>↗</b>
+          <span class="project-question-label">
+            WHAT DO YOU NEED?
           </span>
 
-        </span>
+        </div>
 
 
-        <span class="hook-card-active">
+        <!-- DESIGN OPTIONS -->
 
-          <span class="hook-card-active-label">
-            THE WEB PROCESS
+        <div
+          class="project-choice-group"
+          data-group="design"
+        >
+
+          <button type="button" class="project-choice" data-value="Brand Identity">
+            BRAND IDENTITY
+          </button>
+
+          <button type="button" class="project-choice" data-value="Social Media">
+            SOCIAL MEDIA
+          </button>
+
+          <button type="button" class="project-choice" data-value="Promotion">
+            PROMOTION
+          </button>
+
+          <button type="button" class="project-choice" data-value="Event Design">
+            EVENT DESIGN
+          </button>
+
+          <button type="button" class="project-choice" data-value="Advertising">
+            ADVERTISING
+          </button>
+
+          <button type="button" class="project-choice" data-value="Other Design">
+            OTHER
+          </button>
+
+        </div>
+
+
+        <!-- WEB OPTIONS -->
+
+        <div
+          class="project-choice-group"
+          data-group="web"
+        >
+
+          <button type="button" class="project-choice" data-value="Business Website">
+            BUSINESS WEBSITE
+          </button>
+
+          <button type="button" class="project-choice" data-value="Landing Page">
+            LANDING PAGE
+          </button>
+
+          <button type="button" class="project-choice" data-value="Portfolio">
+            PORTFOLIO
+          </button>
+
+          <button type="button" class="project-choice" data-value="Online Store">
+            ONLINE STORE
+          </button>
+
+          <button type="button" class="project-choice" data-value="Booking Website">
+            BOOKING WEBSITE
+          </button>
+
+          <button type="button" class="project-choice" data-value="Custom Website">
+            CUSTOM
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================
+           STEP 03 — GOAL
+      ================================== -->
+
+      <div
+        class="project-step"
+        data-step="3"
+      >
+
+        <div class="project-question">
+
+          <span class="project-question-number">
+            03
           </span>
 
-          <strong>
-            Build a
-            <span>better presence.</span>
-          </strong>
-
-          <span class="hook-steps">
-
-            <span class="hook-step active">
-              <b>01</b>
-              PLAN
-            </span>
-
-            <span class="hook-step">
-              <b>02</b>
-              BUILD
-            </span>
-
-            <span class="hook-step">
-              <b>03</b>
-              LAUNCH
-            </span>
-
+          <span class="project-question-label">
+            WHAT SHOULD IT DO?
           </span>
 
-          <span class="hook-active-bottom">
+        </div>
 
-            <span>
-              BUSINESS · LANDING · EXPERIENCE
-            </span>
 
-            <span>
-              START WEBSITE <b>→</b>
-            </span>
+        <!-- DESIGN GOALS -->
 
+        <div
+          class="project-choice-group"
+          data-goal-group="design"
+        >
+
+          <button type="button" class="project-choice" data-value="Get Noticed">
+            GET ME NOTICED
+          </button>
+
+          <button type="button" class="project-choice" data-value="Look More Professional">
+            LOOK MORE PROFESSIONAL
+          </button>
+
+          <button type="button" class="project-choice" data-value="Promote Something">
+            PROMOTE SOMETHING
+          </button>
+
+          <button type="button" class="project-choice" data-value="Launch Something">
+            LAUNCH SOMETHING
+          </button>
+
+          <button type="button" class="project-choice" data-value="Get More Customers">
+            GET MORE CUSTOMERS
+          </button>
+
+          <button type="button" class="project-choice" data-value="Build My Brand">
+            BUILD MY BRAND
+          </button>
+
+        </div>
+
+
+        <!-- WEB GOALS -->
+
+        <div
+          class="project-choice-group"
+          data-goal-group="web"
+        >
+
+          <button type="button" class="project-choice" data-value="Get More Clients">
+            GET MORE CLIENTS
+          </button>
+
+          <button type="button" class="project-choice" data-value="Show My Work">
+            SHOW MY WORK
+          </button>
+
+          <button type="button" class="project-choice" data-value="Sell Products">
+            SELL PRODUCTS
+          </button>
+
+          <button type="button" class="project-choice" data-value="Get Bookings">
+            GET BOOKINGS
+          </button>
+
+          <button type="button" class="project-choice" data-value="Build Trust">
+            BUILD TRUST
+          </button>
+
+          <button type="button" class="project-choice" data-value="Improve My Business">
+            MAKE MY BUSINESS LOOK BETTER
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================
+           STEP 04 — CREATIVE DIRECTION
+      ================================== -->
+
+      <div
+        class="project-step"
+        data-step="4"
+      >
+
+        <div class="project-question">
+
+          <span class="project-question-number">
+            04
           </span>
 
-        </span>
+          <span class="project-question-label">
+            WHAT SHOULD IT FEEL LIKE?
+          </span>
 
-      </button>
+        </div>
+
+
+        <p class="project-helper">
+          Choose up to 3 directions.
+        </p>
+
+
+        <div class="project-choice-group project-style-options">
+
+          <button type="button" class="project-choice" data-value="Clean">
+            CLEAN
+          </button>
+
+          <button type="button" class="project-choice" data-value="Bold">
+            BOLD
+          </button>
+
+          <button type="button" class="project-choice" data-value="Luxury">
+            LUXURY
+          </button>
+
+          <button type="button" class="project-choice" data-value="Minimal">
+            MINIMAL
+          </button>
+
+          <button type="button" class="project-choice" data-value="Creative">
+            CREATIVE
+          </button>
+
+          <button type="button" class="project-choice" data-value="Tech">
+            TECH
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================
+           STEP 05 — IDEA
+      ================================== -->
+
+      <div
+        class="project-step"
+        data-step="5"
+      >
+
+        <div class="project-question">
+
+          <span class="project-question-number">
+            05
+          </span>
+
+          <span class="project-question-label">
+            TELL US WHAT'S IN YOUR HEAD
+          </span>
+
+        </div>
+
+
+        <div class="project-message">
+
+          <label
+            for="projectIdea"
+            class="sr-only"
+          >
+            Tell us about your project
+          </label>
+
+          <textarea
+            id="projectIdea"
+            name="projectIdea"
+            rows="5"
+            placeholder="Tell us about the idea, your business, what you're trying to achieve or anything else we should know..."
+          ></textarea>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="project-unsure"
+          id="projectUnsure"
+        >
+          NOT SURE WHAT YOU NEED?
+          <span>HELP ME CHOOSE →</span>
+        </button>
+
+      </div>
 
 
     </div>
 
 
-    <div class="hook-bottom">
+    <!-- =================================
+         PROJECT SUMMARY
+    ================================== -->
 
-      <span>
+    <div
+      class="project-summary"
+      id="projectSummary"
+    >
+
+      <div class="project-summary-top">
+
+        <span>
+          YOUR PROJECT
+        </span>
+
+        <span>
+          LOUD ADS / DIGITAL
+        </span>
+
+      </div>
+
+
+      <div class="project-summary-content">
+
+        <div class="project-summary-item">
+
+          <span>
+            SERVICE
+          </span>
+
+          <strong id="summaryService">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="project-summary-item">
+
+          <span>
+            PROJECT
+          </span>
+
+          <strong id="summaryType">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="project-summary-item">
+
+          <span>
+            GOAL
+          </span>
+
+          <strong id="summaryGoal">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="project-summary-item">
+
+          <span>
+            DIRECTION
+          </span>
+
+          <strong id="summaryStyle">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="project-summary-message">
+
+        <span>
+          PROJECT IDEA
+        </span>
+
+        <p id="summaryMessage">
+          Your idea will appear here.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =================================
+         BUDGET
+    ================================== -->
+
+    <div
+      class="project-budget"
+      id="projectBudget"
+    >
+
+      <div class="project-question">
+
+        <span class="project-question-number">
+          06
+        </span>
+
+        <span class="project-question-label">
+          WHAT ARE YOU LOOKING TO INVEST?
+        </span>
+
+      </div>
+
+
+      <div class="project-choice-group">
+
+        <button
+          type="button"
+          class="project-choice"
+          data-budget="Under R2,000"
+        >
+          UNDER R2,000
+        </button>
+
+        <button
+          type="button"
+          class="project-choice"
+          data-budget="R2,000 — R5,000"
+        >
+          R2,000 — R5,000
+        </button>
+
+        <button
+          type="button"
+          class="project-choice"
+          data-budget="R5,000 — R10,000"
+        >
+          R5,000 — R10,000
+        </button>
+
+        <button
+          type="button"
+          class="project-choice"
+          data-budget="R10,000+"
+        >
+          R10,000+
+        </button>
+
+        <button
+          type="button"
+          class="project-choice"
+          data-budget="Not Sure Yet"
+        >
+          NOT SURE YET
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- =================================
+         FINAL CTA
+    ================================== -->
+
+    <div
+      class="project-final"
+      id="projectFinal"
+    >
+
+      <span class="project-final-label">
+        PROJECT / READY
+      </span>
+
+      <h3>
+        Your project
+        <span>is ready.</span>
+      </h3>
+
+      <p>
+        We have a direction.
+        Now let's make it real.
+      </p>
+
+
+      <a
+        href="#"
+        class="project-final-button"
+        id="projectStart"
+      >
+        START YOUR PROJECT
+        <span>→</span>
+      </a>
+
+    </div>
+
+
+    <!-- BOTTOM -->
+
+    <div class="project-bottom">
+
+      <span id="projectMode">
         DESIGN × DIGITAL
       </span>
 
