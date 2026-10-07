@@ -373,68 +373,453 @@ document.addEventListener(
 
 
 
-
 /* =========================================================
-   SECTION 02 — THE HOOK INTERACTION
+   LOUD ADS — SECTION 02
+   START A PROJECT
 ========================================================= */
 
-const hookGrid =
-  document.querySelector(".hook-grid");
+document.addEventListener("DOMContentLoaded", () => {
 
-const hookCards =
-  document.querySelectorAll(".hook-card");
+  const project = document.querySelector(".project-section");
 
-
-if (hookGrid && hookCards.length) {
-
-  hookCards.forEach(card => {
-
-    card.addEventListener("click", () => {
-
-      const alreadyActive =
-        card.classList.contains("active");
+  if (!project) return;
 
 
-      hookCards.forEach(otherCard => {
+  /* =======================================================
+     ELEMENTS
+  ======================================================= */
 
-        otherCard.classList.remove(
-          "active"
+  const steps = [...project.querySelectorAll(".project-step")];
+  const stepNumber = document.querySelector("#projectStep");
+
+  const serviceOptions = [
+    ...project.querySelectorAll(".service-option")
+  ];
+
+  const choiceGroups = [
+    ...project.querySelectorAll(".project-choice-group")
+  ];
+
+  const goalGroups = [
+    ...project.querySelectorAll(".project-goal-group")
+  ];
+
+  const styleOptions = [
+    ...project.querySelectorAll(".project-style")
+  ];
+
+  const idea = document.querySelector("#projectIdea");
+  const unsure = document.querySelector("#projectUnsure");
+
+  const summary = document.querySelector("#projectSummary");
+  const budget = document.querySelector("#projectBudget");
+  const final = document.querySelector("#projectFinal");
+
+  const summaryService = document.querySelector("#summaryService");
+  const summaryType = document.querySelector("#summaryType");
+  const summaryGoal = document.querySelector("#summaryGoal");
+  const summaryStyle = document.querySelector("#summaryStyle");
+  const summaryMessage = document.querySelector("#summaryMessage");
+
+  const budgetOptions = [
+    ...project.querySelectorAll(".project-budget-option")
+  ];
+
+  const projectStart = document.querySelector("#projectStart");
+
+
+  /* =======================================================
+     PROJECT DATA
+  ======================================================= */
+
+  const state = {
+    service: "",
+    type: "",
+    goal: "",
+    styles: [],
+    idea: "",
+    budget: ""
+  };
+
+
+  /* =======================================================
+     HELPERS
+  ======================================================= */
+
+  function getLabel(element) {
+    if (!element) return "";
+
+    return (
+      element.dataset.label ||
+      element.querySelector("strong")?.textContent ||
+      element.textContent
+    ).trim();
+  }
+
+
+  function showStep(number) {
+
+    steps.forEach(step => {
+      step.classList.toggle(
+        "active",
+        Number(step.dataset.step) === number
+      );
+    });
+
+    if (stepNumber) {
+      stepNumber.textContent =
+        String(number).padStart(2, "0");
+    }
+
+    project.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+
+
+  function showGroup(groups, value) {
+
+    groups.forEach(group => {
+      group.classList.toggle(
+        "active",
+        group.dataset.group === value
+      );
+    });
+  }
+
+
+  function updateSummary() {
+
+    if (summaryService) {
+      summaryService.textContent =
+        state.service || "Not selected";
+    }
+
+    if (summaryType) {
+      summaryType.textContent =
+        state.type || "Not selected";
+    }
+
+    if (summaryGoal) {
+      summaryGoal.textContent =
+        state.goal || "Not selected";
+    }
+
+    if (summaryStyle) {
+      summaryStyle.textContent =
+        state.styles.length
+          ? state.styles.join(", ")
+          : "Not selected";
+    }
+
+    if (summaryMessage) {
+      summaryMessage.textContent =
+        state.idea || "No additional notes";
+    }
+  }
+
+
+  function showProjectSummary() {
+
+    updateSummary();
+
+    if (summary) {
+      summary.classList.add("active");
+    }
+
+    if (budget) {
+      budget.classList.add("active");
+    }
+  }
+
+
+  /* =======================================================
+     STEP 01 — DESIGN / WEB
+  ======================================================= */
+
+  serviceOptions.forEach(option => {
+
+    option.addEventListener("click", () => {
+
+      serviceOptions.forEach(item =>
+        item.classList.remove("selected")
+      );
+
+      option.classList.add("selected");
+
+      state.service =
+        option.dataset.service ||
+        getLabel(option);
+
+      state.type = "";
+      state.goal = "";
+      state.styles = [];
+      state.budget = "";
+
+      choiceGroups.forEach(group =>
+        group.classList.remove("active")
+      );
+
+      goalGroups.forEach(group =>
+        group.classList.remove("active")
+      );
+
+      showGroup(choiceGroups, state.service);
+
+      showStep(2);
+    });
+
+  });
+
+
+  /* =======================================================
+     STEP 02 — WHAT DO YOU NEED?
+  ======================================================= */
+
+  choiceGroups.forEach(group => {
+
+    const options = [
+      ...group.querySelectorAll(".project-choice")
+    ];
+
+    options.forEach(option => {
+
+      option.addEventListener("click", () => {
+
+        options.forEach(item =>
+          item.classList.remove("selected")
         );
 
-        otherCard.setAttribute(
-          "aria-expanded",
-          "false"
-        );
+        option.classList.add("selected");
 
+        state.type = getLabel(option);
+
+        showGroup(goalGroups, state.service);
+
+        showStep(3);
       });
-
-
-      if (alreadyActive) {
-
-        hookGrid.classList.remove(
-          "has-selection"
-        );
-
-        return;
-
-      }
-
-
-      card.classList.add(
-        "active"
-      );
-
-      card.setAttribute(
-        "aria-expanded",
-        "true"
-      );
-
-      hookGrid.classList.add(
-        "has-selection"
-      );
 
     });
 
   });
 
-           }
+
+  /* =======================================================
+     STEP 03 — WHAT SHOULD IT DO?
+  ======================================================= */
+
+  goalGroups.forEach(group => {
+
+    const options = [
+      ...group.querySelectorAll(".project-goal")
+    ];
+
+    options.forEach(option => {
+
+      option.addEventListener("click", () => {
+
+        options.forEach(item =>
+          item.classList.remove("selected")
+        );
+
+        option.classList.add("selected");
+
+        state.goal = getLabel(option);
+
+        showStep(4);
+      });
+
+    });
+
+  });
+
+
+  /* =======================================================
+     STEP 04 — WHAT SHOULD IT FEEL LIKE?
+     MAXIMUM 3
+  ======================================================= */
+
+  styleOptions.forEach(option => {
+
+    option.addEventListener("click", () => {
+
+      const style = getLabel(option);
+
+      if (option.classList.contains("selected")) {
+
+        option.classList.remove("selected");
+
+        state.styles =
+          state.styles.filter(item => item !== style);
+
+        return;
+      }
+
+
+      if (state.styles.length >= 3) {
+        return;
+      }
+
+
+      option.classList.add("selected");
+
+      state.styles.push(style);
+
+
+      /*
+         Once a style is chosen, don't force the user
+         forward immediately.
+
+         This lets them choose up to three directions.
+      */
+    });
+
+  });
+
+
+  /* =======================================================
+     STEP 05 — WHAT'S IN YOUR HEAD?
+  ======================================================= */
+
+  if (idea) {
+
+    idea.addEventListener("input", () => {
+
+      state.idea = idea.value.trim();
+
+      updateSummary();
+
+    });
+
+  }
+
+
+  /* =======================================================
+     NOT SURE — HELP ME CHOOSE
+  ======================================================= */
+
+  if (unsure) {
+
+    unsure.addEventListener("click", () => {
+
+      state.service = "Not sure yet";
+      state.type = "Need help choosing";
+      state.goal = "Find the right direction";
+      state.styles = [];
+      state.idea = "";
+
+      serviceOptions.forEach(item =>
+        item.classList.remove("selected")
+      );
+
+      styleOptions.forEach(item =>
+        item.classList.remove("selected")
+      );
+
+      if (idea) {
+        idea.value =
+          "I'm not completely sure what I need yet. I'd like Loud Ads to help me figure out the right direction.";
+      }
+
+      state.idea = idea?.value || "";
+
+      showStep(5);
+
+      setTimeout(() => {
+        showProjectSummary();
+      }, 350);
+
+    });
+
+  }
+
+
+  /* =======================================================
+     SHOW SUMMARY AFTER STEP 05
+  ======================================================= */
+
+  if (idea) {
+
+    idea.addEventListener("blur", () => {
+
+      if (
+        state.idea.length > 0 ||
+        state.service === "Not sure yet"
+      ) {
+        showProjectSummary();
+      }
+
+    });
+
+  }
+
+
+  /* =======================================================
+     BUDGET
+  ======================================================= */
+
+  budgetOptions.forEach(option => {
+
+    option.addEventListener("click", () => {
+
+      budgetOptions.forEach(item =>
+        item.classList.remove("selected")
+      );
+
+      option.classList.add("selected");
+
+      state.budget =
+        option.dataset.budget ||
+        getLabel(option);
+
+      updateFinalCTA();
+
+      if (final) {
+        final.classList.add("active");
+
+        setTimeout(() => {
+          final.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+        }, 150);
+      }
+
+    });
+
+  });
+
+
+  /* =======================================================
+     FINAL WHATSAPP MESSAGE
+  ======================================================= */
+
+  function updateFinalCTA() {
+
+    if (!projectStart) return;
+
+    const message = [
+      "Hi Loud Ads, I'd like to start a project.",
+      "",
+      `Service: ${state.service || "Not selected"}`,
+      `What I need: ${state.type || "Not selected"}`,
+      `Goal: ${state.goal || "Not selected"}`,
+      `Style: ${state.styles.length ? state.styles.join(", ") : "Not selected"}`,
+      `Budget: ${state.budget || "Not selected"}`,
+      "",
+      `What's in my head: ${state.idea || "I'd like help shaping the direction."}`
+    ].join("\n");
+
+    projectStart.href =
+      `https://wa.me/27711507774?text=${encodeURIComponent(message)}`;
+  }
+
+
+  /* =======================================================
+     INITIAL STATE
+  ======================================================= */
+
+  showStep(1);
+
+});
