@@ -329,6 +329,21 @@ if (menuToggle && mobileMenu) {
 
 
 /* =========================================================
+   LOUD ADS — ALWAYS START AT HERO
+========================================================= */
+
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+window.addEventListener("load", () => {
+  if (!window.location.hash) {
+    window.scrollTo(0, 0);
+  }
+});
+
+
+/* =========================================================
    ESCAPE — CLOSE MOBILE MENU
 ========================================================= */
 
@@ -373,6 +388,7 @@ document.addEventListener(
 
 
 
+        
 /* =========================================================
    LOUD ADS — SECTION 02
    START A PROJECT
@@ -390,7 +406,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ======================================================= */
 
   const steps = [...project.querySelectorAll(".project-step")];
-  const stepNumber = document.querySelector("#projectStep");
+  const stepNumber = project.querySelector("#projectStep");
 
   const serviceOptions = [
     ...project.querySelectorAll(".service-option")
@@ -400,36 +416,40 @@ document.addEventListener("DOMContentLoaded", () => {
     ...project.querySelectorAll(".project-choice-group")
   ];
 
+  /* IMPORTANT:
+     HTML uses data-goal-group instead of
+     .project-goal-group
+  */
   const goalGroups = [
-    ...project.querySelectorAll(".project-goal-group")
+    ...project.querySelectorAll("[data-goal-group]")
   ];
 
   const styleOptions = [
     ...project.querySelectorAll(".project-style")
   ];
 
-  const idea = document.querySelector("#projectIdea");
-  const unsure = document.querySelector("#projectUnsure");
+  const idea = project.querySelector("#projectIdea");
+  const unsure = project.querySelector("#projectUnsure");
 
-  const summary = document.querySelector("#projectSummary");
-  const budget = document.querySelector("#projectBudget");
-  const final = document.querySelector("#projectFinal");
+  const summary = project.querySelector("#projectSummary");
+  const budget = project.querySelector("#projectBudget");
+  const final = project.querySelector("#projectFinal");
 
-  const summaryService = document.querySelector("#summaryService");
-  const summaryType = document.querySelector("#summaryType");
-  const summaryGoal = document.querySelector("#summaryGoal");
-  const summaryStyle = document.querySelector("#summaryStyle");
-  const summaryMessage = document.querySelector("#summaryMessage");
+  const summaryService = project.querySelector("#summaryService");
+  const summaryType = project.querySelector("#summaryType");
+  const summaryGoal = project.querySelector("#summaryGoal");
+  const summaryStyle = project.querySelector("#summaryStyle");
+  const summaryMessage = project.querySelector("#summaryMessage");
 
   const budgetOptions = [
     ...project.querySelectorAll(".project-budget-option")
   ];
 
-  const projectStart = document.querySelector("#projectStart");
+  const projectStart = project.querySelector("#projectStart");
 
 
   /* =======================================================
-     PROJECT DATA
+     PROJECT STATE
   ======================================================= */
 
   const state = {
@@ -443,51 +463,97 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =======================================================
-     HELPERS
+     GET BUTTON TEXT
   ======================================================= */
 
   function getLabel(element) {
+
     if (!element) return "";
+
+    const strong = element.querySelector("strong");
 
     return (
       element.dataset.label ||
-      element.querySelector("strong")?.textContent ||
+      strong?.textContent ||
       element.textContent
     ).trim();
+
   }
 
+
+  /* =======================================================
+     SHOW STEP
+  ======================================================= */
 
   function showStep(number) {
 
     steps.forEach(step => {
+
       step.classList.toggle(
         "active",
         Number(step.dataset.step) === number
       );
+
     });
 
     if (stepNumber) {
+
       stepNumber.textContent =
         String(number).padStart(2, "0");
+
     }
 
     project.scrollIntoView({
       behavior: "smooth",
       block: "start"
     });
+
   }
 
 
-  function showGroup(groups, value) {
+  /* =======================================================
+     SHOW SERVICE-SPECIFIC GROUP
+  ======================================================= */
 
-    groups.forEach(group => {
+  function showChoiceGroup(service) {
+
+    choiceGroups.forEach(group => {
+
       group.classList.toggle(
         "active",
-        group.dataset.group === value
+        group.dataset.group === service
       );
+
     });
+
   }
 
+
+  /* =======================================================
+     SHOW GOAL GROUP
+  ======================================================= */
+
+  function showGoalGroup(service) {
+
+    goalGroups.forEach(group => {
+
+      const groupName =
+        group.dataset.goalGroup ||
+        group.dataset.group;
+
+      group.classList.toggle(
+        "active",
+        groupName === service
+      );
+
+    });
+
+  }
+
+
+  /* =======================================================
+     UPDATE SUMMARY
+  ======================================================= */
 
   function updateSummary() {
 
@@ -517,34 +583,22 @@ document.addEventListener("DOMContentLoaded", () => {
       summaryMessage.textContent =
         state.idea || "No additional notes";
     }
-  }
 
-
-  function showProjectSummary() {
-
-    updateSummary();
-
-    if (summary) {
-      summary.classList.add("active");
-    }
-
-    if (budget) {
-      budget.classList.add("active");
-    }
   }
 
 
   /* =======================================================
-     STEP 01 — DESIGN / WEB
+     STEP 01
+     DESIGN / WEB
   ======================================================= */
 
   serviceOptions.forEach(option => {
 
     option.addEventListener("click", () => {
 
-      serviceOptions.forEach(item =>
-        item.classList.remove("selected")
-      );
+      serviceOptions.forEach(item => {
+        item.classList.remove("selected");
+      });
 
       option.classList.add("selected");
 
@@ -557,24 +611,26 @@ document.addEventListener("DOMContentLoaded", () => {
       state.styles = [];
       state.budget = "";
 
-      choiceGroups.forEach(group =>
-        group.classList.remove("active")
-      );
+      choiceGroups.forEach(group => {
+        group.classList.remove("active");
+      });
 
-      goalGroups.forEach(group =>
-        group.classList.remove("active")
-      );
+      goalGroups.forEach(group => {
+        group.classList.remove("active");
+      });
 
-      showGroup(choiceGroups, state.service);
+      showChoiceGroup(state.service);
 
       showStep(2);
+
     });
 
   });
 
 
   /* =======================================================
-     STEP 02 — WHAT DO YOU NEED?
+     STEP 02
+     WHAT DO YOU NEED?
   ======================================================= */
 
   choiceGroups.forEach(group => {
@@ -587,17 +643,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       option.addEventListener("click", () => {
 
-        options.forEach(item =>
-          item.classList.remove("selected")
-        );
+        options.forEach(item => {
+          item.classList.remove("selected");
+        });
 
         option.classList.add("selected");
 
         state.type = getLabel(option);
 
-        showGroup(goalGroups, state.service);
+        showGoalGroup(state.service);
 
         showStep(3);
+
       });
 
     });
@@ -606,7 +663,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =======================================================
-     STEP 03 — WHAT SHOULD IT DO?
+     STEP 03
+     WHAT SHOULD IT DO?
   ======================================================= */
 
   goalGroups.forEach(group => {
@@ -619,15 +677,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
       option.addEventListener("click", () => {
 
-        options.forEach(item =>
-          item.classList.remove("selected")
-        );
+        options.forEach(item => {
+          item.classList.remove("selected");
+        });
 
         option.classList.add("selected");
 
         state.goal = getLabel(option);
 
         showStep(4);
+
       });
 
     });
@@ -636,7 +695,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =======================================================
-     STEP 04 — WHAT SHOULD IT FEEL LIKE?
+     STEP 04
+     STYLE
      MAXIMUM 3
   ======================================================= */
 
@@ -656,30 +716,22 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-
       if (state.styles.length >= 3) {
         return;
       }
-
 
       option.classList.add("selected");
 
       state.styles.push(style);
 
-
-      /*
-         Once a style is chosen, don't force the user
-         forward immediately.
-
-         This lets them choose up to three directions.
-      */
     });
 
   });
 
 
   /* =======================================================
-     STEP 05 — WHAT'S IN YOUR HEAD?
+     STEP 05
+     IDEA
   ======================================================= */
 
   if (idea) {
@@ -692,11 +744,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
+    idea.addEventListener("blur", () => {
+
+      if (
+        state.idea.length ||
+        state.service === "Not sure yet"
+      ) {
+
+        updateSummary();
+
+        if (summary) {
+          summary.classList.add("active");
+        }
+
+        if (budget) {
+          budget.classList.add("active");
+        }
+
+      }
+
+    });
+
   }
 
 
   /* =======================================================
-     NOT SURE — HELP ME CHOOSE
+     NOT SURE
   ======================================================= */
 
   if (unsure) {
@@ -707,47 +780,34 @@ document.addEventListener("DOMContentLoaded", () => {
       state.type = "Need help choosing";
       state.goal = "Find the right direction";
       state.styles = [];
-      state.idea = "";
 
-      serviceOptions.forEach(item =>
-        item.classList.remove("selected")
-      );
+      serviceOptions.forEach(item => {
+        item.classList.remove("selected");
+      });
 
-      styleOptions.forEach(item =>
-        item.classList.remove("selected")
-      );
+      styleOptions.forEach(item => {
+        item.classList.remove("selected");
+      });
 
       if (idea) {
-        idea.value =
-          "I'm not completely sure what I need yet. I'd like Loud Ads to help me figure out the right direction.";
-      }
 
-      state.idea = idea?.value || "";
+        idea.value =
+          "I'm not completely sure what I need yet. I'd like Loud Ads to help me find the right direction.";
+
+        state.idea = idea.value;
+
+      }
 
       showStep(5);
 
-      setTimeout(() => {
-        showProjectSummary();
-      }, 350);
+      updateSummary();
 
-    });
+      if (summary) {
+        summary.classList.add("active");
+      }
 
-  }
-
-
-  /* =======================================================
-     SHOW SUMMARY AFTER STEP 05
-  ======================================================= */
-
-  if (idea) {
-
-    idea.addEventListener("blur", () => {
-
-      if (
-        state.idea.length > 0 ||
-        state.service === "Not sure yet"
-      ) {
-        showProjectSummary();
+      if (budget) {
+        budget.classList.add("active");
       }
 
     });
@@ -763,9 +823,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     option.addEventListener("click", () => {
 
-      budgetOptions.forEach(item =>
-        item.classList.remove("selected")
-      );
+      budgetOptions.forEach(item => {
+        item.classList.remove("selected");
+      });
 
       option.classList.add("selected");
 
@@ -776,14 +836,18 @@ document.addEventListener("DOMContentLoaded", () => {
       updateFinalCTA();
 
       if (final) {
+
         final.classList.add("active");
 
         setTimeout(() => {
+
           final.scrollIntoView({
             behavior: "smooth",
             block: "center"
           });
+
         }, 150);
+
       }
 
     });
@@ -792,7 +856,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =======================================================
-     FINAL WHATSAPP MESSAGE
+     WHATSAPP CTA
   ======================================================= */
 
   function updateFinalCTA() {
@@ -805,19 +869,27 @@ document.addEventListener("DOMContentLoaded", () => {
       `Service: ${state.service || "Not selected"}`,
       `What I need: ${state.type || "Not selected"}`,
       `Goal: ${state.goal || "Not selected"}`,
-      `Style: ${state.styles.length ? state.styles.join(", ") : "Not selected"}`,
+      `Style: ${
+        state.styles.length
+          ? state.styles.join(", ")
+          : "Not selected"
+      }`,
       `Budget: ${state.budget || "Not selected"}`,
       "",
-      `What's in my head: ${state.idea || "I'd like help shaping the direction."}`
+      `What's in my head: ${
+        state.idea ||
+        "I'd like help shaping the direction."
+      }`
     ].join("\n");
 
     projectStart.href =
       `https://wa.me/27711507774?text=${encodeURIComponent(message)}`;
+
   }
 
 
   /* =======================================================
-     INITIAL STATE
+     START
   ======================================================= */
 
   showStep(1);
