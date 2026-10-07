@@ -378,108 +378,67 @@ document.addEventListener(
    SECTION 02 — THE HOOK INTERACTION
 ========================================================= */
 
-const hookGrid =
-  document.querySelector(".hook-grid");
+document.addEventListener("DOMContentLoaded", () => {
 
-const hookCards =
-  document.querySelectorAll(".hook-card");
+  const hookGrid =
+    document.querySelector(".hook-grid");
 
-
-hookCards.forEach(card => {
-
-  card.addEventListener("click", () => {
-
-    const wasActive =
-      card.classList.contains("active");
+  const hookCards =
+    document.querySelectorAll(".hook-card");
 
 
-    hookCards.forEach(otherCard => {
+  if (!hookGrid || !hookCards.length) return;
 
-      otherCard.classList.remove("active");
 
-      otherCard.setAttribute(
+  hookCards.forEach(card => {
+
+    card.addEventListener("click", () => {
+
+      const isActive =
+        card.classList.contains("active");
+
+
+      /* CLOSE ALL CARDS */
+
+      hookCards.forEach(otherCard => {
+
+        otherCard.classList.remove("active");
+
+        otherCard.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+      });
+
+
+      /* CLICK ACTIVE CARD AGAIN = RESET */
+
+      if (isActive) {
+
+        hookGrid.classList.remove(
+          "has-selection"
+        );
+
+        return;
+
+      }
+
+
+      /* OPEN SELECTED CARD */
+
+      card.classList.add("active");
+
+      card.setAttribute(
         "aria-expanded",
-        "false"
+        "true"
       );
 
-    });
-
-
-    if (wasActive) {
-
-      hookGrid.classList.remove(
+      hookGrid.classList.add(
         "has-selection"
       );
 
-      return;
-
-    }
-
-
-    card.classList.add("active");
-
-    card.setAttribute(
-      "aria-expanded",
-      "true"
-    );
-
-    hookGrid.classList.add(
-      "has-selection"
-    );
-
-  });
-
-
-  /* DESKTOP MICRO MOVEMENT */
-
-  card.addEventListener("mousemove", event => {
-
-    if (
-      !window.matchMedia(
-        "(pointer: fine)"
-      ).matches
-    ) return;
-
-
-    const rect =
-      card.getBoundingClientRect();
-
-
-    const x =
-      (event.clientX - rect.left) /
-      rect.width -
-      .5;
-
-    const y =
-      (event.clientY - rect.top) /
-      rect.height -
-      .5;
-
-
-    card.style.setProperty(
-      "--card-x",
-      `${x * 2}px`
-    );
-
-    card.style.setProperty(
-      "--card-y",
-      `${y * 2}px`
-    );
-
-  });
-
-
-  card.addEventListener("mouseleave", () => {
-
-    card.style.setProperty(
-      "--card-x",
-      "0px"
-    );
-
-    card.style.setProperty(
-      "--card-y",
-      "0px"
-    );
+    });
 
   });
 
