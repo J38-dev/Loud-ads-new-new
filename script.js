@@ -368,45 +368,18 @@ document.addEventListener(
   }
 );
 
-/* =========================================================
+
+
+
+
+
+
+   /* =========================================================
    SECTION 02 — THE HOOK INTERACTION
 ========================================================= */
 
-const hookCards =
-  document.querySelectorAll(".hook-card");
-
-hookCards.forEach(card => {
-
-  card.addEventListener("mousemove", event => {
-
-    const rect =
-      card.getBoundingClientRect();
-
-    const x =
-      ((event.clientX - rect.left) / rect.width - .5) * 2;
-
-    const y =
-      ((event.clientY - rect.top) / rect.height - .5) * 2;
-
-    card.style.transform =
-      `translate(${x * 3}px, ${y * 3}px)`;
-
-  });
-
-
-  card.addEventListener("mouseleave", () => {
-
-    card.style.transform =
-      "translate(0, 0)";
-
-  });
-
-});
-
-
-/* =========================================================
-   SECTION 02 — THE HOOK INTERACTION
-========================================================= */
+const hookGrid =
+  document.querySelector(".hook-grid");
 
 const hookCards =
   document.querySelectorAll(".hook-card");
@@ -416,7 +389,7 @@ hookCards.forEach(card => {
 
   card.addEventListener("click", () => {
 
-    const isActive =
+    const wasActive =
       card.classList.contains("active");
 
 
@@ -432,53 +405,81 @@ hookCards.forEach(card => {
     });
 
 
-    if (!isActive) {
+    if (wasActive) {
 
-      card.classList.add("active");
-
-      card.setAttribute(
-        "aria-expanded",
-        "true"
+      hookGrid.classList.remove(
+        "has-selection"
       );
 
+      return;
+
     }
+
+
+    card.classList.add("active");
+
+    card.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+
+    hookGrid.classList.add(
+      "has-selection"
+    );
 
   });
 
 
-  /* DESKTOP MICRO-MOVEMENT */
+  /* DESKTOP MICRO MOVEMENT */
 
   card.addEventListener("mousemove", event => {
 
     if (
-      window.matchMedia("(pointer: fine)").matches
-    ) {
+      !window.matchMedia(
+        "(pointer: fine)"
+      ).matches
+    ) return;
 
-      const rect =
-        card.getBoundingClientRect();
 
-      const x =
-        (event.clientX - rect.left) /
-        rect.width -
-        .5;
+    const rect =
+      card.getBoundingClientRect();
 
-      const y =
-        (event.clientY - rect.top) /
-        rect.height -
-        .5;
 
-      card.style.transform =
-        `translate(${x * 2}px, ${y * 2}px)`;
+    const x =
+      (event.clientX - rect.left) /
+      rect.width -
+      .5;
 
-    }
+    const y =
+      (event.clientY - rect.top) /
+      rect.height -
+      .5;
+
+
+    card.style.setProperty(
+      "--card-x",
+      `${x * 2}px`
+    );
+
+    card.style.setProperty(
+      "--card-y",
+      `${y * 2}px`
+    );
 
   });
 
 
   card.addEventListener("mouseleave", () => {
 
-    card.style.transform =
-      "translate(0, 0)";
+    card.style.setProperty(
+      "--card-x",
+      "0px"
+    );
+
+    card.style.setProperty(
+      "--card-y",
+      "0px"
+    );
 
   });
 
