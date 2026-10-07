@@ -972,6 +972,7 @@ position: relative;
 
 
 
+   
 
 /* =========================================================
    SECTION 02 — THE HOOK
@@ -979,8 +980,7 @@ position: relative;
 
 .hook-section {
   position: relative;
-
-  padding: 85px 5vw 45px;
+  padding: 75px 5vw 45px;
 
   background: transparent;
 
@@ -1011,7 +1011,6 @@ position: relative;
 
   font-size: 9px;
   font-weight: 800;
-
   letter-spacing: .15em;
   text-transform: uppercase;
 }
@@ -1024,16 +1023,13 @@ position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
-
   color: #777;
 }
 
 .hook-status i {
   width: 6px;
   height: 6px;
-
   border-radius: 50%;
-
   background: var(--red);
 }
 
@@ -1043,13 +1039,12 @@ position: relative;
 ========================================================= */
 
 .hook-heading {
-  padding: 38px 0 45px;
+  padding: 35px 0 40px;
 }
 
 .hook-intro {
   max-width: 390px;
-
-  margin: 0 0 20px;
+  margin: 0 0 18px;
 
   color: #666;
 
@@ -1061,11 +1056,8 @@ position: relative;
   margin: 0;
 
   font-size: clamp(58px, 8vw, 120px);
-
   line-height: .84;
-
   letter-spacing: -.075em;
-
   font-weight: 800;
 }
 
@@ -1076,7 +1068,7 @@ position: relative;
 
 
 /* =========================================================
-   CARDS
+   CARD GRID
 ========================================================= */
 
 .hook-grid {
@@ -1085,8 +1077,13 @@ position: relative;
 
   gap: 1px;
 
-  background: var(--black);
+  background: var(--red);
 }
+
+
+/* =========================================================
+   CARD
+========================================================= */
 
 .hook-card {
   position: relative;
@@ -1098,7 +1095,7 @@ position: relative;
 
   border: 0;
 
-  background: rgba(255,255,255,.45);
+  background: rgba(220, 20, 60, .055);
 
   color: var(--black);
 
@@ -1111,20 +1108,50 @@ position: relative;
   font: inherit;
 
   transition:
-    background .35s var(--ease),
-    transform .35s var(--ease);
+    background .4s var(--ease),
+    transform .4s var(--ease),
+    color .4s var(--ease);
 }
 
 
-/* NO BLACK HOVER */
+/* =========================================================
+   HOVER — NO BLACK
+========================================================= */
 
-.hook-card:hover {
-  background: rgba(255,255,255,.72);
+@media (hover: hover) and (pointer: fine) {
+
+  .hook-card:hover {
+    background: rgba(220, 20, 60, .10);
+    transform: translateY(-3px);
+  }
+
 }
+
+
+/* =========================================================
+   FOCUS
+========================================================= */
 
 .hook-card:focus-visible {
   outline: 2px solid var(--red);
   outline-offset: -2px;
+}
+
+
+/* =========================================================
+   SELECTED CARD
+========================================================= */
+
+.hook-card.active {
+  background: rgba(220, 20, 60, .14);
+}
+
+.hook-card.active .hook-card-link {
+  color: var(--black);
+}
+
+.hook-card.active .hook-card-link b {
+  transform: rotate(45deg);
 }
 
 
@@ -1142,13 +1169,12 @@ position: relative;
 
   font-size: 10px;
   font-weight: 800;
-
   letter-spacing: .12em;
 }
 
 
 /* =========================================================
-   MAIN CONTENT
+   CARD CONTENT
 ========================================================= */
 
 .hook-card-content {
@@ -1157,8 +1183,6 @@ position: relative;
   left: 30px;
   right: 30px;
   bottom: 30px;
-
-  display: block;
 }
 
 .hook-card-type {
@@ -1166,9 +1190,10 @@ position: relative;
 
   margin-bottom: 14px;
 
+  color: var(--black);
+
   font-size: 9px;
   font-weight: 800;
-
   letter-spacing: .17em;
 }
 
@@ -1178,9 +1203,7 @@ position: relative;
   max-width: 600px;
 
   font-size: clamp(40px, 4.8vw, 70px);
-
   line-height: .87;
-
   letter-spacing: -.065em;
 }
 
@@ -1202,11 +1225,18 @@ position: relative;
 
   margin: 28px 0 15px;
 
-  background: var(--line);
+  background: rgba(0, 0, 0, .16);
+
+  transform-origin: left;
 
   transition:
     transform .45s var(--ease),
     background .35s var(--ease);
+}
+
+.hook-card.active .hook-line {
+  background: var(--red);
+  transform: scaleX(.35);
 }
 
 
@@ -1223,7 +1253,6 @@ position: relative;
 
   font-size: 9px;
   font-weight: 800;
-
   letter-spacing: .12em;
 }
 
@@ -1233,21 +1262,12 @@ position: relative;
   font-size: 18px;
 
   transition:
-    transform .35s var(--ease);
+    transform .4s var(--ease);
 }
 
 
 /* =========================================================
-   INTERACTION
-========================================================= */
-
-.hook-card:hover .hook-card-link b {
-  transform: translate(5px, -5px);
-}
-
-
-/* =========================================================
-   DETAIL PANEL
+   REVEALED DETAIL
 ========================================================= */
 
 .hook-card-detail {
@@ -1258,9 +1278,9 @@ position: relative;
 
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 8px;
 
-  color: #777;
+  color: var(--red);
 
   font-size: 8px;
   font-weight: 800;
@@ -1271,32 +1291,28 @@ position: relative;
 
   opacity: 0;
 
-  transform: translateY(-8px);
+  transform: translateY(-12px);
 
   pointer-events: none;
 
   transition:
-    opacity .35s var(--ease),
-    transform .35s var(--ease);
+    opacity .4s var(--ease),
+    transform .4s var(--ease);
 }
 
 .hook-card.active .hook-card-detail {
   opacity: 1;
-
   transform: translateY(0);
 }
 
-.hook-card.active .hook-card-link {
-  color: var(--black);
-}
 
-.hook-card.active .hook-card-link b {
-  transform: rotate(45deg);
-}
+/* =========================================================
+   CARD RELEVANCE STATE
+========================================================= */
 
-.hook-card.active .hook-line {
-  transform: scaleX(.35);
-  background: var(--red);
+.hook-grid.has-selection .hook-card:not(.active) {
+  opacity: .45;
+  transform: scale(.985);
 }
 
 
@@ -1316,7 +1332,6 @@ position: relative;
   font-weight: 800;
 
   letter-spacing: .14em;
-
   text-transform: uppercase;
 }
 
@@ -1328,10 +1343,7 @@ position: relative;
 @media (max-width: 600px) {
 
   .hook-section {
-    padding:
-      75px
-      20px
-      30px;
+    padding: 70px 20px 30px;
   }
 
   .hook-status {
@@ -1343,11 +1355,10 @@ position: relative;
   }
 
   .hook-heading {
-    padding: 32px 0 35px;
+    padding: 30px 0 35px;
   }
 
   .hook-intro {
-    margin-bottom: 18px;
     font-size: 13px;
   }
 
@@ -1361,13 +1372,12 @@ position: relative;
   }
 
   .hook-card {
-    min-height: 275px;
-
+    min-height: 280px;
     padding: 25px;
   }
 
   .hook-card + .hook-card {
-    border-top: 1px solid var(--black);
+    border-top: 1px solid var(--red);
   }
 
   .hook-card-number {
@@ -1392,7 +1402,6 @@ position: relative;
   .hook-card-detail {
     top: 23px;
     right: 25px;
-
     font-size: 7px;
   }
 
