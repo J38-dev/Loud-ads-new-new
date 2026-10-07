@@ -969,6 +969,10 @@ position: relative;
 
 
 
+
+
+
+
 /* =========================================================
    SECTION 02 — THE HOOK
 ========================================================= */
@@ -976,32 +980,15 @@ position: relative;
 .hook-section {
   position: relative;
 
-  padding: 150px 5vw 45px;
+  padding: 85px 5vw 45px;
 
-  background:
-    linear-gradient(
-      to right,
-      rgba(0, 0, 0, .045) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, .045) 1px,
-      transparent 1px
-    );
-
-  background-size: 40px 40px;
+  background: transparent;
 
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 
   overflow: hidden;
 }
-
-
-/* =========================================================
-   INNER
-========================================================= */
 
 .hook-inner {
   width: min(1400px, 100%);
@@ -1010,7 +997,7 @@ position: relative;
 
 
 /* =========================================================
-   TOP BAR
+   TOP
 ========================================================= */
 
 .hook-top {
@@ -1026,7 +1013,6 @@ position: relative;
   font-weight: 800;
 
   letter-spacing: .15em;
-
   text-transform: uppercase;
 }
 
@@ -1057,15 +1043,13 @@ position: relative;
 ========================================================= */
 
 .hook-heading {
-  max-width: 1050px;
-
-  padding: 65px 0 90px;
+  padding: 38px 0 45px;
 }
 
 .hook-intro {
-  max-width: 430px;
+  max-width: 390px;
 
-  margin: 0 0 25px;
+  margin: 0 0 20px;
 
   color: #666;
 
@@ -1076,9 +1060,9 @@ position: relative;
 .hook-heading h2 {
   margin: 0;
 
-  font-size: clamp(60px, 9vw, 135px);
+  font-size: clamp(58px, 8vw, 120px);
 
-  line-height: .82;
+  line-height: .84;
 
   letter-spacing: -.075em;
 
@@ -1087,7 +1071,6 @@ position: relative;
 
 .hook-heading h2 span {
   display: block;
-
   color: var(--red);
 }
 
@@ -1108,29 +1091,52 @@ position: relative;
 .hook-card {
   position: relative;
 
-  min-height: 390px;
+  width: 100%;
+  min-height: 330px;
 
-  padding: 32px;
+  padding: 30px;
 
-  background: var(--grey);
+  border: 0;
+
+  background: rgba(255,255,255,.45);
+
+  color: var(--black);
+
+  text-align: left;
+
+  cursor: pointer;
 
   overflow: hidden;
 
+  font: inherit;
+
   transition:
-    background .45s var(--ease),
-    color .45s var(--ease);
+    background .35s var(--ease),
+    transform .35s var(--ease);
+}
+
+
+/* NO BLACK HOVER */
+
+.hook-card:hover {
+  background: rgba(255,255,255,.72);
+}
+
+.hook-card:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: -2px;
 }
 
 
 /* =========================================================
-   CARD NUMBER
+   NUMBER
 ========================================================= */
 
 .hook-card-number {
   position: absolute;
 
-  top: 30px;
-  left: 32px;
+  top: 28px;
+  left: 30px;
 
   color: var(--red);
 
@@ -1142,19 +1148,23 @@ position: relative;
 
 
 /* =========================================================
-   CARD CONTENT
+   MAIN CONTENT
 ========================================================= */
 
 .hook-card-content {
   position: absolute;
 
-  left: 32px;
-  right: 32px;
-  bottom: 32px;
+  left: 30px;
+  right: 30px;
+  bottom: 30px;
+
+  display: block;
 }
 
-.hook-card-content > p {
-  margin: 0 0 15px;
+.hook-card-type {
+  display: block;
+
+  margin-bottom: 14px;
 
   font-size: 9px;
   font-weight: 800;
@@ -1162,45 +1172,41 @@ position: relative;
   letter-spacing: .17em;
 }
 
-.hook-card-content h3 {
+.hook-card-content strong {
+  display: block;
+
   max-width: 600px;
 
-  margin: 0;
+  font-size: clamp(40px, 4.8vw, 70px);
 
-  font-size: clamp(42px, 5vw, 75px);
-
-  line-height: .86;
+  line-height: .87;
 
   letter-spacing: -.065em;
 }
 
-.hook-card-content h3 span {
+.hook-card-content strong span {
   display: block;
-
   color: var(--red);
-
-  transition:
-    color .4s var(--ease);
 }
 
 
 /* =========================================================
-   CARD LINE
+   LINE
 ========================================================= */
 
 .hook-line {
+  display: block;
+
   width: 100%;
   height: 1px;
 
-  margin: 30px 0 17px;
+  margin: 28px 0 15px;
 
   background: var(--line);
 
-  transform-origin: left;
-
   transition:
-    transform .5s var(--ease),
-    background .4s var(--ease);
+    transform .45s var(--ease),
+    background .35s var(--ease);
 }
 
 
@@ -1227,47 +1233,82 @@ position: relative;
   font-size: 18px;
 
   transition:
-    transform .4s var(--ease);
+    transform .35s var(--ease);
 }
 
 
 /* =========================================================
-   CARD INTERACTION
+   INTERACTION
 ========================================================= */
 
-.hook-card:hover {
-  background: var(--black);
-  color: var(--white);
-}
-
-.hook-card:hover .hook-card-content h3 span {
-  color: var(--red);
-}
-
-.hook-card:hover .hook-line {
-  background: rgba(255, 255, 255, .2);
-
-  transform: scaleX(.35);
-}
-
-.hook-card:hover .hook-card-link {
-  color: #aaa;
-}
-
 .hook-card:hover .hook-card-link b {
-  transform: translate(6px, -6px);
+  transform: translate(5px, -5px);
 }
 
 
 /* =========================================================
-   BOTTOM BAR
+   DETAIL PANEL
+========================================================= */
+
+.hook-card-detail {
+  position: absolute;
+
+  top: 28px;
+  right: 30px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  color: #777;
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: .1em;
+
+  text-align: right;
+
+  opacity: 0;
+
+  transform: translateY(-8px);
+
+  pointer-events: none;
+
+  transition:
+    opacity .35s var(--ease),
+    transform .35s var(--ease);
+}
+
+.hook-card.active .hook-card-detail {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+.hook-card.active .hook-card-link {
+  color: var(--black);
+}
+
+.hook-card.active .hook-card-link b {
+  transform: rotate(45deg);
+}
+
+.hook-card.active .hook-line {
+  transform: scaleX(.35);
+  background: var(--red);
+}
+
+
+/* =========================================================
+   BOTTOM
 ========================================================= */
 
 .hook-bottom {
   display: flex;
   justify-content: space-between;
 
-  padding-top: 18px;
+  padding-top: 17px;
 
   color: #777;
 
@@ -1288,41 +1329,30 @@ position: relative;
 
   .hook-section {
     padding:
-      95px
+      75px
       20px
       30px;
-  }
-
-
-  .hook-top {
-    font-size: 8px;
   }
 
   .hook-status {
     display: none;
   }
 
+  .hook-top {
+    font-size: 8px;
+  }
 
   .hook-heading {
-    padding:
-      50px
-      0
-      60px;
+    padding: 32px 0 35px;
   }
 
   .hook-intro {
-    max-width: 300px;
-
-    margin-bottom: 22px;
-
+    margin-bottom: 18px;
     font-size: 13px;
   }
 
   .hook-heading h2 {
-    font-size:
-      clamp(50px, 15vw, 76px);
-
-    line-height: .84;
+    font-size: clamp(48px, 14vw, 72px);
   }
 
 
@@ -1331,7 +1361,7 @@ position: relative;
   }
 
   .hook-card {
-    min-height: 300px;
+    min-height: 275px;
 
     padding: 25px;
   }
@@ -1341,7 +1371,7 @@ position: relative;
   }
 
   .hook-card-number {
-    top: 24px;
+    top: 23px;
     left: 25px;
   }
 
@@ -1351,18 +1381,20 @@ position: relative;
     bottom: 25px;
   }
 
-  .hook-card-content h3 {
-    font-size:
-      clamp(38px, 12vw, 58px);
+  .hook-card-content strong {
+    font-size: clamp(37px, 11vw, 55px);
   }
 
   .hook-line {
-    margin:
-      25px
-      0
-      15px;
+    margin: 23px 0 14px;
   }
 
+  .hook-card-detail {
+    top: 23px;
+    right: 25px;
+
+    font-size: 7px;
+  }
 
   .hook-bottom {
     font-size: 7px;
@@ -1378,11 +1410,11 @@ position: relative;
 @media (max-width: 380px) {
 
   .hook-heading h2 {
-    font-size: 48px;
+    font-size: 46px;
   }
 
-  .hook-card-content h3 {
-    font-size: 36px;
+  .hook-card-content strong {
+    font-size: 35px;
   }
 
-   }
+}
