@@ -378,31 +378,28 @@ document.addEventListener(
    SECTION 02 — THE HOOK INTERACTION
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+const hookGrid =
+  document.querySelector(".hook-grid");
 
-  const hookGrid =
-    document.querySelector(".hook-grid");
-
-  const hookCards =
-    document.querySelectorAll(".hook-card");
+const hookCards =
+  document.querySelectorAll(".hook-card");
 
 
-  if (!hookGrid || !hookCards.length) return;
-
+if (hookGrid && hookCards.length) {
 
   hookCards.forEach(card => {
 
     card.addEventListener("click", () => {
 
-      const isActive =
+      const alreadyActive =
         card.classList.contains("active");
 
 
-      /* CLOSE ALL CARDS */
-
       hookCards.forEach(otherCard => {
 
-        otherCard.classList.remove("active");
+        otherCard.classList.remove(
+          "active"
+        );
 
         otherCard.setAttribute(
           "aria-expanded",
@@ -412,9 +409,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
 
-      /* CLICK ACTIVE CARD AGAIN = RESET */
-
-      if (isActive) {
+      if (alreadyActive) {
 
         hookGrid.classList.remove(
           "has-selection"
@@ -425,9 +420,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
 
-      /* OPEN SELECTED CARD */
-
-      card.classList.add("active");
+      card.classList.add(
+        "active"
+      );
 
       card.setAttribute(
         "aria-expanded",
@@ -442,4 +437,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   });
 
-});
+           }
