@@ -980,6 +980,7 @@ position: relative;
 
 .hook-section {
   position: relative;
+
   padding: 75px 5vw 45px;
 
   background: transparent;
@@ -1011,6 +1012,7 @@ position: relative;
 
   font-size: 9px;
   font-weight: 800;
+
   letter-spacing: .15em;
   text-transform: uppercase;
 }
@@ -1023,13 +1025,16 @@ position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
+
   color: #777;
 }
 
 .hook-status i {
   width: 6px;
   height: 6px;
+
   border-radius: 50%;
+
   background: var(--red);
 }
 
@@ -1044,6 +1049,7 @@ position: relative;
 
 .hook-intro {
   max-width: 390px;
+
   margin: 0 0 18px;
 
   color: #666;
@@ -1056,13 +1062,17 @@ position: relative;
   margin: 0;
 
   font-size: clamp(58px, 8vw, 120px);
+
   line-height: .84;
+
   letter-spacing: -.075em;
+
   font-weight: 800;
 }
 
 .hook-heading h2 span {
   display: block;
+
   color: var(--red);
 }
 
@@ -1073,7 +1083,9 @@ position: relative;
 
 .hook-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+
+  grid-template-columns:
+    repeat(2, 1fr);
 
   gap: 1px;
 
@@ -1095,7 +1107,11 @@ position: relative;
 
   border: 0;
 
-  background: rgba(220, 20, 60, .055);
+  appearance: none;
+  -webkit-appearance: none;
+
+  background:
+    rgba(220, 20, 60, .055);
 
   color: var(--black);
 
@@ -1108,21 +1124,24 @@ position: relative;
   font: inherit;
 
   transition:
-    background .4s var(--ease),
-    transform .4s var(--ease),
-    color .4s var(--ease);
+    background .35s var(--ease),
+    transform .35s var(--ease),
+    opacity .35s var(--ease);
 }
 
 
 /* =========================================================
-   HOVER — NO BLACK
+   HOVER
 ========================================================= */
 
 @media (hover: hover) and (pointer: fine) {
 
   .hook-card:hover {
-    background: rgba(220, 20, 60, .10);
-    transform: translateY(-3px);
+    background:
+      rgba(220, 20, 60, .10);
+
+    transform:
+      translateY(-3px);
   }
 
 }
@@ -1132,6 +1151,10 @@ position: relative;
    FOCUS
 ========================================================= */
 
+.hook-card:focus {
+  outline: none;
+}
+
 .hook-card:focus-visible {
   outline: 2px solid var(--red);
   outline-offset: -2px;
@@ -1139,19 +1162,15 @@ position: relative;
 
 
 /* =========================================================
-   SELECTED CARD
+   ACTIVE CARD
 ========================================================= */
 
 .hook-card.active {
-  background: rgba(220, 20, 60, .14);
-}
+  background:
+    rgba(220, 20, 60, .15);
 
-.hook-card.active .hook-card-link {
-  color: var(--black);
-}
-
-.hook-card.active .hook-card-link b {
-  transform: rotate(45deg);
+  transform:
+    translateY(-3px);
 }
 
 
@@ -1169,12 +1188,13 @@ position: relative;
 
   font-size: 10px;
   font-weight: 800;
+
   letter-spacing: .12em;
 }
 
 
 /* =========================================================
-   CARD CONTENT
+   MAIN CARD CONTENT
 ========================================================= */
 
 .hook-card-content {
@@ -1185,6 +1205,11 @@ position: relative;
   bottom: 30px;
 }
 
+
+/* =========================================================
+   TYPE
+========================================================= */
+
 .hook-card-type {
   display: block;
 
@@ -1194,27 +1219,43 @@ position: relative;
 
   font-size: 9px;
   font-weight: 800;
+
   letter-spacing: .17em;
 }
+
+
+/* =========================================================
+   CARD HEADLINE
+========================================================= */
 
 .hook-card-content strong {
   display: block;
 
+  margin: 0;
+
   max-width: 600px;
 
-  font-size: clamp(40px, 4.8vw, 70px);
-  line-height: .87;
+  color: var(--black);
+
+  font-size:
+    clamp(40px, 4.8vw, 70px);
+
+  line-height: .9;
+
   letter-spacing: -.065em;
+
+  font-weight: 800;
 }
 
 .hook-card-content strong span {
   display: block;
+
   color: var(--red);
 }
 
 
 /* =========================================================
-   LINE
+   DIVIDER
 ========================================================= */
 
 .hook-line {
@@ -1225,27 +1266,31 @@ position: relative;
 
   margin: 28px 0 15px;
 
-  background: rgba(0, 0, 0, .16);
+  background:
+    rgba(0, 0, 0, .16);
 
   transform-origin: left;
 
   transition:
-    transform .45s var(--ease),
-    background .35s var(--ease);
+    transform .4s var(--ease),
+    background .3s var(--ease);
 }
 
 .hook-card.active .hook-line {
   background: var(--red);
-  transform: scaleX(.35);
+
+  transform:
+    scaleX(.35);
 }
 
 
 /* =========================================================
-   CARD LINK
+   CARD ACTION
 ========================================================= */
 
 .hook-card-link {
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 
@@ -1253,6 +1298,7 @@ position: relative;
 
   font-size: 9px;
   font-weight: 800;
+
   letter-spacing: .12em;
 }
 
@@ -1262,12 +1308,21 @@ position: relative;
   font-size: 18px;
 
   transition:
-    transform .4s var(--ease);
+    transform .35s var(--ease);
+}
+
+.hook-card.active .hook-card-link {
+  color: var(--black);
+}
+
+.hook-card.active .hook-card-link b {
+  transform:
+    rotate(45deg);
 }
 
 
 /* =========================================================
-   REVEALED DETAIL
+   REVEALED DETAILS
 ========================================================= */
 
 .hook-card-detail {
@@ -1277,7 +1332,9 @@ position: relative;
   right: 30px;
 
   display: flex;
+
   flex-direction: column;
+
   gap: 8px;
 
   color: var(--red);
@@ -1291,28 +1348,31 @@ position: relative;
 
   opacity: 0;
 
-  transform: translateY(-12px);
+  transform:
+    translateY(-10px);
 
   pointer-events: none;
 
   transition:
-    opacity .4s var(--ease),
-    transform .4s var(--ease);
+    opacity .35s var(--ease),
+    transform .35s var(--ease);
 }
 
 .hook-card.active .hook-card-detail {
   opacity: 1;
-  transform: translateY(0);
+
+  transform:
+    translateY(0);
 }
 
 
 /* =========================================================
-   CARD RELEVANCE STATE
+   SELECTED STATE
 ========================================================= */
 
-.hook-grid.has-selection .hook-card:not(.active) {
+.hook-grid.has-selection
+.hook-card:not(.active) {
   opacity: .45;
-  transform: scale(.985);
 }
 
 
@@ -1322,6 +1382,7 @@ position: relative;
 
 .hook-bottom {
   display: flex;
+
   justify-content: space-between;
 
   padding-top: 17px;
@@ -1332,6 +1393,7 @@ position: relative;
   font-weight: 800;
 
   letter-spacing: .14em;
+
   text-transform: uppercase;
 }
 
@@ -1363,7 +1425,8 @@ position: relative;
   }
 
   .hook-heading h2 {
-    font-size: clamp(48px, 14vw, 72px);
+    font-size:
+      clamp(48px, 14vw, 72px);
   }
 
 
@@ -1371,19 +1434,25 @@ position: relative;
     display: block;
   }
 
+
   .hook-card {
-    min-height: 280px;
+    min-height: 290px;
+
     padding: 25px;
   }
 
+
   .hook-card + .hook-card {
-    border-top: 1px solid var(--red);
+    border-top:
+      1px solid var(--red);
   }
+
 
   .hook-card-number {
     top: 23px;
     left: 25px;
   }
+
 
   .hook-card-content {
     left: 25px;
@@ -1391,19 +1460,28 @@ position: relative;
     bottom: 25px;
   }
 
+
   .hook-card-content strong {
-    font-size: clamp(37px, 11vw, 55px);
+    font-size:
+      clamp(37px, 11vw, 55px);
+
+    line-height: .9;
   }
 
+
   .hook-line {
-    margin: 23px 0 14px;
+    margin:
+      23px 0 14px;
   }
+
 
   .hook-card-detail {
     top: 23px;
     right: 25px;
+
     font-size: 7px;
   }
+
 
   .hook-bottom {
     font-size: 7px;
@@ -1426,4 +1504,4 @@ position: relative;
     font-size: 35px;
   }
 
-}
+   }
