@@ -667,101 +667,70 @@ document.addEventListener("DOMContentLoaded", () => {
 
   });
 
+/* =========================================================
+   STEP 04 — CREATIVE DIRECTION
+========================================================= */
 
-  /* =========================================================
-     STEP 04 — CREATIVE DIRECTION
-  ========================================================= */
+styleOptions.forEach(option => {
 
-  styleOptions.forEach(option => {
+  option.addEventListener("click", () => {
 
-    option.addEventListener("click", () => {
+    const style =
+      option.dataset.value ||
+      option.textContent.trim();
 
-      const style =
-        option.dataset.value ||
-        option.textContent.trim();
+    if (option.classList.contains("selected")) {
 
-      /*
-        Remove selected style
-      */
+      option.classList.remove("selected");
 
-      if (option.classList.contains("selected")) {
+      state.styles =
+        state.styles.filter(item => item !== style);
 
-        option.classList.remove("selected");
+      return;
+    }
 
-        state.styles =
-          state.styles.filter(item => item !== style);
+    if (state.styles.length >= 3) {
+      return;
+    }
 
-        return;
-      }
+    option.classList.add("selected");
 
-
-      /*
-        Maximum 3 styles
-      */
-
-      if (state.styles.length >= 3) {
-        return;
-      }
-
-
-      option.classList.add("selected");
-
-      state.styles.push(style);
-
-    });
+    state.styles.push(style);
 
   });
 
-
-  /*
-    Move to Step 05 when the user has selected
-    at least one creative direction.
-
-    Clicking the selected style again removes it.
-    Clicking another style adds it.
-  */
-
-  styleOptions.forEach(option => {
-
-    option.addEventListener("dblclick", () => {
-
-      if (!state.styles.length) return;
-
-      showStep(5, true);
-
-    });
-
-  });
+});
 
 
-  /*
-    Also allow a normal click on a selected style
-    to continue after choosing it.
+/* =========================================================
+   STEP 04 → STEP 05
+========================================================= */
 
-    The second click on a style moves forward.
-  */
+const styleGroup =
+  project.querySelector(".project-style-options");
 
-  styleOptions.forEach(option => {
+if (styleGroup) {
 
-    option.addEventListener("click", () => {
+  styleGroup.classList.add("active");
 
-      if (state.styles.length > 0) {
+  const continueButton =
+    document.createElement("button");
 
-        clearTimeout(option._nextTimer);
+  continueButton.type = "button";
+  continueButton.className = "project-style-continue";
+  continueButton.textContent = "CONTINUE →";
 
-        option._nextTimer = setTimeout(() => {
+  styleGroup.parentElement.appendChild(continueButton);
 
-          if (state.styles.length > 0) {
-            showStep(5, true);
-          }
+  continueButton.addEventListener("click", () => {
 
-        }, 350);
+    if (!state.styles.length) return;
 
-      }
-
-    });
+    showStep(5, true);
 
   });
+
+}
 
 
   /* =========================================================
