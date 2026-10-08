@@ -960,36 +960,43 @@ if (projectSubmit) {
 const workFilters = document.querySelectorAll(".work-filter");
 const workCards = document.querySelectorAll(".work-card");
 
+function showWork(category) {
+
+  workCards.forEach(card => {
+
+    if (card.dataset.category === category) {
+      card.style.display = "";
+    } else {
+      card.style.display = "none";
+    }
+
+  });
+
+}
+
+
 workFilters.forEach(filter => {
 
-  filter.addEventListener("click", () => {
+  filter.addEventListener("click", function () {
 
-    const selectedCategory = filter.dataset.filter;
-
-    /* Active button */
+    const category = this.dataset.filter;
 
     workFilters.forEach(button => {
       button.classList.remove("active");
     });
 
-    filter.classList.add("active");
+    this.classList.add("active");
 
-
-    /* Show matching projects */
-
-    workCards.forEach(card => {
-
-      if (card.dataset.category === selectedCategory) {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
-
-    });
+    showWork(category);
 
   });
 
 });
+
+
+/* Start with Web Design */
+
+showWork("web");
 
 
   /* =========================================================
