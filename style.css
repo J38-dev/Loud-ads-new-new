@@ -2078,6 +2078,11 @@ position: relative;
   background: #e9e9e7;
 }
 
+/* Graphic design = Instagram Story format */
+.work-card[data-category="design"] .work-image {
+  aspect-ratio: 9 / 16;
+}
+
 .work-image img {
   display: block;
   width: 100%;
@@ -2295,9 +2300,13 @@ position: relative;
     gap: 45px;
   }
 
-  .work-image {
-    aspect-ratio: 4 / 3;
-  }
+  .work-card[data-category="web"] .work-image {
+  aspect-ratio: 4 / 3;
+}
+
+.work-card[data-category="design"] .work-image {
+  aspect-ratio: 9 / 16;
+   }
 
   .work-image-arrow {
     opacity: 1;
