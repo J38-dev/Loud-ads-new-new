@@ -1607,3 +1607,39 @@ position: relative;
     width: 100%;
   }
    }
+
+
+   .project-style-options {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.project-style-continue {
+  margin-top: 20px;
+  padding: 15px 22px;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.project-style-continue:hover {
+  background: #dc143c;
+  border-color: #dc143c;
+}
+
+@media (max-width: 700px) {
+  .project-style-options {
+    grid-template-columns: 1fr;
+  }
+
+  .project-style-continue {
+    width: 100%;
+  }
+}
