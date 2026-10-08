@@ -2338,3 +2338,590 @@ position: relative;
   }
 
    }
+
+
+
+
+
+
+/* =========================================================
+   LOUD ADS — SECTION 04
+   WHY LOUD ADS
+   Uses the EXISTING site grid + existing brand system
+========================================================= */
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.why-section {
+  position: relative;
+  width: 100%;
+  padding: 120px 0 0;
+  overflow: hidden;
+}
+
+.why-inner {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.why-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.why-label,
+.why-status {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.why-status {
+  color: rgba(0, 0, 0, .45);
+}
+
+
+/* =========================================================
+   MAIN HEADING
+========================================================= */
+
+.why-heading {
+  padding: 70px 0 85px;
+  max-width: 900px;
+}
+
+.why-intro {
+  margin: 0 0 18px;
+  color: rgba(0, 0, 0, .5);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+
+.why-heading h2 {
+  margin: 0;
+  font-size: clamp(48px, 7vw, 92px);
+  line-height: .94;
+  letter-spacing: -.055em;
+  font-weight: 800;
+}
+
+.why-heading h2 span {
+  display: block;
+  color: var(--red);
+}
+
+
+/* =========================================================
+   WHY ACCORDION
+========================================================= */
+
+.why-list {
+  width: 100%;
+  border-top: 1px solid var(--line);
+}
+
+.why-item {
+  position: relative;
+  width: 100%;
+  min-height: 90px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 70px 1fr 40px;
+  align-items: center;
+  gap: 20px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  color: var(--black);
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  transition:
+    color .25s ease,
+    padding-left .25s ease;
+}
+
+.why-item:hover {
+  color: var(--red);
+  padding-left: 10px;
+}
+
+.why-item.active {
+  color: var(--red);
+}
+
+.why-number {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.why-title {
+  font-size: clamp(20px, 3vw, 34px);
+  font-weight: 800;
+  letter-spacing: -.025em;
+}
+
+.why-icon {
+  justify-self: end;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  font-size: 20px;
+  line-height: 1;
+  transition:
+    background .25s ease,
+    color .25s ease,
+    border-color .25s ease;
+}
+
+.why-item:hover .why-icon,
+.why-item.active .why-icon {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--white);
+}
+
+
+/* =========================================================
+   ACCORDION ANSWER
+========================================================= */
+
+.why-answer {
+  max-height: 0;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  transition: max-height .4s ease;
+}
+
+.why-answer.active {
+  max-height: 220px;
+}
+
+.why-answer p {
+  max-width: 680px;
+  margin: 0;
+  padding: 0 70px 30px 90px;
+  color: rgba(0, 0, 0, .58);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   PICK YOUR PROBLEM
+========================================================= */
+
+.problem-section {
+  padding: 130px 0 120px;
+}
+
+.problem-heading {
+  max-width: 700px;
+  margin-bottom: 45px;
+}
+
+.problem-label,
+.loud-meter-label {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--red);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+
+.problem-heading h3,
+.loud-meter-heading h3 {
+  margin: 0;
+  font-size: clamp(38px, 6vw, 70px);
+  line-height: .98;
+  letter-spacing: -.045em;
+  font-weight: 800;
+}
+
+.problem-heading h3 span,
+.loud-meter-heading h3 span {
+  color: var(--red);
+}
+
+
+/* =========================================================
+   PROBLEM OPTIONS
+========================================================= */
+
+.problem-options {
+  border-top: 1px solid var(--line);
+}
+
+.problem-option {
+  width: 100%;
+  min-height: 72px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  color: var(--black);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    color .25s ease,
+    padding-left .25s ease;
+}
+
+.problem-option:hover,
+.problem-option.active {
+  color: var(--red);
+  padding-left: 10px;
+}
+
+.problem-option span:last-child {
+  font-size: 20px;
+  transition: transform .25s ease;
+}
+
+.problem-option:hover span:last-child,
+.problem-option.active span:last-child {
+  transform: translate(4px, -4px);
+}
+
+
+/* =========================================================
+   PROBLEM RESPONSE
+========================================================= */
+
+.problem-response {
+  min-height: 130px;
+  margin-top: 25px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, .35);
+}
+
+.problem-response-label {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--red);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+
+.problem-response-text {
+  max-width: 700px;
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.45;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   LOUDNESS METER
+========================================================= */
+
+.loud-meter-section {
+  padding: 20px 0 130px;
+}
+
+.loud-meter-heading {
+  max-width: 700px;
+  margin-bottom: 55px;
+}
+
+.loud-meter {
+  width: 100%;
+}
+
+.loud-meter-track {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 0, 0, .12);
+}
+
+.loud-meter-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 50%;
+  background: var(--red);
+  transition: width .15s ease;
+}
+
+.loud-meter-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 22px;
+  height: 22px;
+  border: 4px solid var(--red);
+  background: var(--grey);
+  transform: translate(-50%, -50%);
+  transition: left .15s ease;
+}
+
+.loud-meter-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.loud-meter-result {
+  margin-top: 45px;
+  max-width: 600px;
+}
+
+.loud-meter-result strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--red);
+  font-size: 12px;
+  letter-spacing: .12em;
+}
+
+.loud-meter-result p {
+  margin: 0;
+  color: rgba(0, 0, 0, .55);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   FINAL CTA
+========================================================= */
+
+.why-final {
+  margin: 0 -20px;
+  padding: 100px 20px 120px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.why-final p {
+  margin: 0 0 18px;
+  color: rgba(0, 0, 0, .45);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+
+.why-final h3 {
+  max-width: 900px;
+  margin: 0 auto 38px;
+  font-size: clamp(42px, 7vw, 86px);
+  line-height: .94;
+  letter-spacing: -.055em;
+  font-weight: 800;
+}
+
+.why-final h3 span {
+  display: block;
+  color: var(--red);
+}
+
+
+/* =========================================================
+   CTA BUTTON
+========================================================= */
+
+.why-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  min-height: 56px;
+  padding: 0 28px;
+  border: 1px solid var(--black);
+  background: var(--black);
+  color: var(--white);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  transition:
+    background .25s ease,
+    border-color .25s ease,
+    color .25s ease,
+    transform .25s ease;
+}
+
+.why-cta span {
+  font-size: 18px;
+  transition: transform .25s ease;
+}
+
+.why-cta:hover {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+.why-cta:hover span {
+  transform: translate(3px, -3px);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .why-section {
+    padding-top: 80px;
+  }
+
+  .why-inner {
+    width: min(100% - 28px, 1200px);
+  }
+
+  .why-top {
+    padding-bottom: 14px;
+  }
+
+  .why-status {
+    display: none;
+  }
+
+  .why-heading {
+    padding: 55px 0 60px;
+  }
+
+  .why-intro {
+    font-size: 12px;
+  }
+
+  .why-heading h2 {
+    font-size: clamp(43px, 13vw, 64px);
+  }
+
+
+  /* ACCORDION */
+
+  .why-item {
+    min-height: 76px;
+    grid-template-columns: 38px 1fr 34px;
+    gap: 10px;
+  }
+
+  .why-item:hover {
+    padding-left: 0;
+  }
+
+  .why-title {
+    font-size: 18px;
+    line-height: 1.15;
+  }
+
+  .why-number {
+    font-size: 10px;
+  }
+
+  .why-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 17px;
+  }
+
+  .why-answer p {
+    padding: 0 38px 25px 48px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+
+  /* PROBLEM */
+
+  .problem-section {
+    padding: 90px 0 90px;
+  }
+
+  .problem-heading {
+    margin-bottom: 35px;
+  }
+
+  .problem-heading h3,
+  .loud-meter-heading h3 {
+    font-size: clamp(38px, 11vw, 55px);
+  }
+
+  .problem-option {
+    min-height: 68px;
+    font-size: 12px;
+  }
+
+  .problem-option:hover {
+    padding-left: 0;
+  }
+
+  .problem-response {
+    padding: 22px;
+  }
+
+  .problem-response-text {
+    font-size: 17px;
+  }
+
+
+  /* METER */
+
+  .loud-meter-section {
+    padding: 10px 0 90px;
+  }
+
+  .loud-meter-heading {
+    margin-bottom: 45px;
+  }
+
+  .loud-meter-dot {
+    width: 20px;
+    height: 20px;
+  }
+
+
+  /* FINAL CTA */
+
+  .why-final {
+    margin: 0 -14px;
+    padding: 80px 14px 90px;
+  }
+
+  .why-final h3 {
+    font-size: clamp(42px, 12vw, 62px);
+  }
+
+  .why-cta {
+    width: 100%;
+  }
+
+        }
+     
