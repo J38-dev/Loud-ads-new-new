@@ -319,6 +319,8 @@ img {
 
   inset: 0;
 
+background: transparent;
+
   background-image:
     linear-gradient(
       to right,
