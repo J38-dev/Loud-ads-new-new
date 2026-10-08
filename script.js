@@ -389,44 +389,31 @@ document.addEventListener(
 
 
         
+
 /* =========================================================
    LOUD ADS — SECTION 02
-   START A PROJECT
+   START A PROJECT BUILDER
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
   const project = document.querySelector(".project-section");
-
   if (!project) return;
-
-
-  /* =======================================================
-     ELEMENTS
-  ======================================================= */
 
   const steps = [...project.querySelectorAll(".project-step")];
   const stepNumber = project.querySelector("#projectStep");
 
-  const serviceOptions = [
-    ...project.querySelectorAll(".service-option")
-  ];
+  const serviceOptions =
+    [...project.querySelectorAll(".service-option")];
 
-  const choiceGroups = [
-    ...project.querySelectorAll(".project-choice-group")
-  ];
+  const choiceGroups =
+    [...project.querySelectorAll(".project-choice-group")];
 
-  /* IMPORTANT:
-     HTML uses data-goal-group instead of
-     .project-goal-group
-  */
-  const goalGroups = [
-    ...project.querySelectorAll("[data-goal-group]")
-  ];
+  const goalGroups =
+    [...project.querySelectorAll('[data-goal-group]')];
 
-  const styleOptions = [
-    ...project.querySelectorAll(".project-style")
-  ];
+  const styleOptions =
+    [...project.querySelectorAll(".project-style-options .project-choice")];
 
   const idea = project.querySelector("#projectIdea");
   const unsure = project.querySelector("#projectUnsure");
@@ -441,16 +428,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const summaryStyle = project.querySelector("#summaryStyle");
   const summaryMessage = project.querySelector("#summaryMessage");
 
-  const budgetOptions = [
-    ...project.querySelectorAll(".project-budget-option")
-  ];
+  const budgetOptions =
+    [...project.querySelectorAll("#projectBudget .project-choice")];
 
   const projectStart = project.querySelector("#projectStart");
-
-
-  /* =======================================================
-     PROJECT STATE
-  ======================================================= */
 
   const state = {
     service: "",
@@ -462,198 +443,191 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
 
-  /* =======================================================
-     GET BUTTON TEXT
-  ======================================================= */
-
-  function getLabel(element) {
-
-    if (!element) return "";
-
-    const strong = element.querySelector("strong");
-
-    return (
-      element.dataset.label ||
-      strong?.textContent ||
-      element.textContent
-    ).trim();
-
-  }
-
-
-  /* =======================================================
+  /* =========================================================
      SHOW STEP
-  ======================================================= */
+  ========================================================= */
 
-  function showStep(number) {
+  function showStep(number, shouldScroll = false) {
 
     steps.forEach(step => {
-
       step.classList.toggle(
         "active",
         Number(step.dataset.step) === number
       );
-
     });
 
     if (stepNumber) {
-
       stepNumber.textContent =
         String(number).padStart(2, "0");
-
     }
 
-    project.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-
+    if (shouldScroll) {
+      project.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
   }
 
 
-  /* =======================================================
-     SHOW SERVICE-SPECIFIC GROUP
-  ======================================================= */
+  /* =========================================================
+     SHOW PROJECT TYPE
+  ========================================================= */
 
-  function showChoiceGroup(service) {
+  function showProjectTypes(service) {
 
     choiceGroups.forEach(group => {
 
-      group.classList.toggle(
-        "active",
-        group.dataset.group === service
-      );
+      const groupName = group.dataset.group;
+
+      if (
+        groupName === "design" ||
+        groupName === "web"
+      ) {
+        group.classList.toggle(
+          "active",
+          groupName === service
+        );
+      }
 
     });
-
   }
 
 
-  /* =======================================================
-     SHOW GOAL GROUP
-  ======================================================= */
+  /* =========================================================
+     SHOW GOALS
+  ========================================================= */
 
-  function showGoalGroup(service) {
+  function showGoals(service) {
 
     goalGroups.forEach(group => {
 
-      const groupName =
-        group.dataset.goalGroup ||
-        group.dataset.group;
-
       group.classList.toggle(
         "active",
-        groupName === service
+        group.dataset.goalGroup === service
       );
 
     });
-
   }
 
 
-  /* =======================================================
+  /* =========================================================
      UPDATE SUMMARY
-  ======================================================= */
+  ========================================================= */
 
   function updateSummary() {
 
     if (summaryService) {
       summaryService.textContent =
-        state.service || "Not selected";
+        state.service || "—";
     }
 
     if (summaryType) {
       summaryType.textContent =
-        state.type || "Not selected";
+        state.type || "—";
     }
 
     if (summaryGoal) {
       summaryGoal.textContent =
-        state.goal || "Not selected";
+        state.goal || "—";
     }
 
     if (summaryStyle) {
       summaryStyle.textContent =
         state.styles.length
           ? state.styles.join(", ")
-          : "Not selected";
+          : "—";
     }
 
     if (summaryMessage) {
       summaryMessage.textContent =
-        state.idea || "No additional notes";
+        state.idea || "Your idea will appear here.";
     }
-
   }
 
 
-  /* =======================================================
-     STEP 01
-     DESIGN / WEB
-  ======================================================= */
+  /* =========================================================
+     STEP 01 — SERVICE
+  ========================================================= */
 
   serviceOptions.forEach(option => {
 
     option.addEventListener("click", () => {
 
-      serviceOptions.forEach(item => {
-        item.classList.remove("selected");
-      });
+      serviceOptions.forEach(item =>
+        item.classList.remove("selected")
+      );
 
       option.classList.add("selected");
 
       state.service =
-        option.dataset.service ||
-        getLabel(option);
+        option.dataset.service || "";
 
       state.type = "";
       state.goal = "";
       state.styles = [];
+      state.idea = "";
       state.budget = "";
 
-      choiceGroups.forEach(group => {
-        group.classList.remove("active");
-      });
+      choiceGroups.forEach(group =>
+        group.classList.remove("active")
+      );
 
-      goalGroups.forEach(group => {
-        group.classList.remove("active");
-      });
+      goalGroups.forEach(group =>
+        group.classList.remove("active")
+      );
 
-      showChoiceGroup(state.service);
+      styleOptions.forEach(item =>
+        item.classList.remove("selected")
+      );
 
-      showStep(2);
+      showProjectTypes(state.service);
+
+      showStep(2, true);
 
     });
 
   });
 
 
-  /* =======================================================
-     STEP 02
-     WHAT DO YOU NEED?
-  ======================================================= */
+  /* =========================================================
+     STEP 02 — PROJECT TYPE
+  ========================================================= */
 
   choiceGroups.forEach(group => {
 
-    const options = [
-      ...group.querySelectorAll(".project-choice")
-    ];
+    /*
+      Only handle the project-type groups here.
+      Ignore the style and budget groups.
+    */
+
+    if (
+      !group.dataset.group ||
+      group.dataset.goalGroup
+    ) {
+      return;
+    }
+
+    const options =
+      [...group.querySelectorAll(".project-choice")];
 
     options.forEach(option => {
 
       option.addEventListener("click", () => {
 
-        options.forEach(item => {
-          item.classList.remove("selected");
-        });
+        options.forEach(item =>
+          item.classList.remove("selected")
+        );
 
         option.classList.add("selected");
 
-        state.type = getLabel(option);
+        state.type =
+          option.dataset.value ||
+          option.textContent.trim();
 
-        showGoalGroup(state.service);
+        showGoals(state.service);
 
-        showStep(3);
+        showStep(3, true);
 
       });
 
@@ -662,30 +636,30 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  /* =======================================================
-     STEP 03
-     WHAT SHOULD IT DO?
-  ======================================================= */
+  /* =========================================================
+     STEP 03 — GOAL
+  ========================================================= */
 
   goalGroups.forEach(group => {
 
-    const options = [
-      ...group.querySelectorAll(".project-goal")
-    ];
+    const options =
+      [...group.querySelectorAll(".project-choice")];
 
     options.forEach(option => {
 
       option.addEventListener("click", () => {
 
-        options.forEach(item => {
-          item.classList.remove("selected");
-        });
+        options.forEach(item =>
+          item.classList.remove("selected")
+        );
 
         option.classList.add("selected");
 
-        state.goal = getLabel(option);
+        state.goal =
+          option.dataset.value ||
+          option.textContent.trim();
 
-        showStep(4);
+        showStep(4, true);
 
       });
 
@@ -694,17 +668,21 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  /* =======================================================
-     STEP 04
-     STYLE
-     MAXIMUM 3
-  ======================================================= */
+  /* =========================================================
+     STEP 04 — CREATIVE DIRECTION
+  ========================================================= */
 
   styleOptions.forEach(option => {
 
     option.addEventListener("click", () => {
 
-      const style = getLabel(option);
+      const style =
+        option.dataset.value ||
+        option.textContent.trim();
+
+      /*
+        Remove selected style
+      */
 
       if (option.classList.contains("selected")) {
 
@@ -716,9 +694,15 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+
+      /*
+        Maximum 3 styles
+      */
+
       if (state.styles.length >= 3) {
         return;
       }
+
 
       option.classList.add("selected");
 
@@ -729,48 +713,78 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  /* =======================================================
-     STEP 05
-     IDEA
-  ======================================================= */
+  /*
+    Move to Step 05 when the user has selected
+    at least one creative direction.
+
+    Clicking the selected style again removes it.
+    Clicking another style adds it.
+  */
+
+  styleOptions.forEach(option => {
+
+    option.addEventListener("dblclick", () => {
+
+      if (!state.styles.length) return;
+
+      showStep(5, true);
+
+    });
+
+  });
+
+
+  /*
+    Also allow a normal click on a selected style
+    to continue after choosing it.
+
+    The second click on a style moves forward.
+  */
+
+  styleOptions.forEach(option => {
+
+    option.addEventListener("click", () => {
+
+      if (state.styles.length > 0) {
+
+        clearTimeout(option._nextTimer);
+
+        option._nextTimer = setTimeout(() => {
+
+          if (state.styles.length > 0) {
+            showStep(5, true);
+          }
+
+        }, 350);
+
+      }
+
+    });
+
+  });
+
+
+  /* =========================================================
+     STEP 05 — PROJECT IDEA
+  ========================================================= */
 
   if (idea) {
 
     idea.addEventListener("input", () => {
 
-      state.idea = idea.value.trim();
+      state.idea =
+        idea.value.trim();
 
       updateSummary();
-
-    });
-
-    idea.addEventListener("blur", () => {
-
-      if (
-        state.idea.length ||
-        state.service === "Not sure yet"
-      ) {
-
-        updateSummary();
-
-        if (summary) {
-          summary.classList.add("active");
-        }
-
-        if (budget) {
-          budget.classList.add("active");
-        }
-
-      }
 
     });
 
   }
 
 
-  /* =======================================================
-     NOT SURE
-  ======================================================= */
+  /* =========================================================
+     NOT SURE BUTTON
+  ========================================================= */
 
   if (unsure) {
 
@@ -781,33 +795,68 @@ document.addEventListener("DOMContentLoaded", () => {
       state.goal = "Find the right direction";
       state.styles = [];
 
-      serviceOptions.forEach(item => {
-        item.classList.remove("selected");
-      });
-
-      styleOptions.forEach(item => {
-        item.classList.remove("selected");
-      });
-
       if (idea) {
 
         idea.value =
           "I'm not completely sure what I need yet. I'd like Loud Ads to help me find the right direction.";
 
-        state.idea = idea.value;
+        state.idea =
+          idea.value;
 
       }
-
-      showStep(5);
 
       updateSummary();
 
-      if (summary) {
-        summary.classList.add("active");
-      }
+      showStep(5, true);
 
-      if (budget) {
-        budget.classList.add("active");
+    });
+
+  }
+
+
+  /* =========================================================
+     SHOW SUMMARY + BUDGET
+  ========================================================= */
+
+  function revealBudget() {
+
+    updateSummary();
+
+    if (summary) {
+      summary.classList.add("active");
+    }
+
+    if (budget) {
+      budget.classList.add("active");
+    }
+
+    if (budget) {
+
+      setTimeout(() => {
+
+        budget.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+
+      }, 150);
+
+    }
+
+  }
+
+
+  /*
+    Reveal the summary once the user leaves
+    the idea field.
+  */
+
+  if (idea) {
+
+    idea.addEventListener("blur", () => {
+
+      if (state.idea.length) {
+        revealBudget();
       }
 
     });
@@ -815,23 +864,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  /* =======================================================
+  /* =========================================================
      BUDGET
-  ======================================================= */
+  ========================================================= */
 
   budgetOptions.forEach(option => {
 
     option.addEventListener("click", () => {
 
-      budgetOptions.forEach(item => {
-        item.classList.remove("selected");
-      });
+      budgetOptions.forEach(item =>
+        item.classList.remove("selected")
+      );
 
       option.classList.add("selected");
 
       state.budget =
         option.dataset.budget ||
-        getLabel(option);
+        option.textContent.trim();
 
       updateFinalCTA();
 
@@ -855,9 +904,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  /* =======================================================
-     WHATSAPP CTA
-  ======================================================= */
+  /* =========================================================
+     FINAL WHATSAPP MESSAGE
+  ========================================================= */
 
   function updateFinalCTA() {
 
@@ -867,30 +916,32 @@ document.addEventListener("DOMContentLoaded", () => {
       "Hi Loud Ads, I'd like to start a project.",
       "",
       `Service: ${state.service || "Not selected"}`,
-      `What I need: ${state.type || "Not selected"}`,
+      `Project: ${state.type || "Not selected"}`,
       `Goal: ${state.goal || "Not selected"}`,
-      `Style: ${
+      `Direction: ${
         state.styles.length
           ? state.styles.join(", ")
           : "Not selected"
       }`,
       `Budget: ${state.budget || "Not selected"}`,
       "",
-      `What's in my head: ${
+      `Project idea: ${
         state.idea ||
         "I'd like help shaping the direction."
       }`
     ].join("\n");
 
     projectStart.href =
-      `https://wa.me/27711507774?text=${encodeURIComponent(message)}`;
+      "https://wa.me/27711507774?text=" +
+      encodeURIComponent(message);
 
   }
 
 
-  /* =======================================================
-     START
-  ======================================================= */
+  /* =========================================================
+     INITIAL STATE
+     IMPORTANT: DO NOT SCROLL HERE
+  ========================================================= */
 
   showStep(1);
 
