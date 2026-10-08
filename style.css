@@ -1696,3 +1696,215 @@ position: relative;
   }
 
    }
+
+
+
+/* =========================================================
+   SECTION 02 — QUESTION HEADINGS
+========================================================= */
+
+.project-question {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 32px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(0, 0, 0, .14);
+}
+
+.project-question-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+
+  flex: 0 0 38px;
+
+  background: #dc143c;
+  color: #fff;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.project-question-label {
+  position: relative;
+
+  color: #111;
+
+  font-size: clamp(17px, 2vw, 24px);
+  font-weight: 800;
+  letter-spacing: -.025em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.project-question-label::after {
+  content: "";
+  display: block;
+
+  width: 32px;
+  height: 2px;
+
+  margin-top: 8px;
+
+  background: #dc143c;
+}
+
+
+/* =========================================================
+   STEP 04 — HELPER TEXT
+========================================================= */
+
+.project-helper {
+  margin: -12px 0 24px;
+
+  color: #666;
+
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: .01em;
+}
+
+
+/* =========================================================
+   STEP 04 — PREVENT OVERLAP
+========================================================= */
+
+.project-step[data-step="4"] .project-question {
+  margin-bottom: 24px;
+}
+
+.project-step[data-step="4"] .project-helper {
+  margin: 0 0 22px;
+}
+
+.project-style-options {
+  margin-top: 0;
+}
+
+
+/* =========================================================
+   ALL PROJECT OPTIONS — RED INTERACTION
+========================================================= */
+
+.project-choice,
+.project-option,
+.project-submit {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.project-choice:hover,
+.project-choice:focus,
+.project-choice:active,
+.project-option:hover,
+.project-option:focus,
+.project-option:active {
+  background: #dc143c !important;
+  border-color: #dc143c !important;
+  color: #fff !important;
+  outline: none;
+}
+
+
+/* Keep text inside options white during interaction */
+
+.project-choice:hover *,
+.project-choice:focus *,
+.project-choice:active *,
+.project-option:hover *,
+.project-option:focus *,
+.project-option:active * {
+  color: #fff !important;
+}
+
+
+/* Selected state stays red */
+
+.project-choice.selected,
+.project-option.selected {
+  background: #dc143c !important;
+  border-color: #dc143c !important;
+  color: #fff !important;
+}
+
+
+/* =========================================================
+   SERVICE CARDS — RED ONLY
+========================================================= */
+
+.service-option:hover,
+.service-option:focus,
+.service-option:active {
+  background: #dc143c !important;
+  border-color: #dc143c !important;
+  color: #fff !important;
+}
+
+.service-option:hover *,
+.service-option:focus *,
+.service-option:active * {
+  color: #fff !important;
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON — NEVER BLACK ON INTERACTION
+========================================================= */
+
+.project-submit {
+  background: #dc143c;
+  border-color: #dc143c;
+  color: #fff;
+}
+
+.project-submit:hover,
+.project-submit:focus,
+.project-submit:active {
+  background: #dc143c !important;
+  border-color: #dc143c !important;
+  color: #fff !important;
+  outline: none;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .project-question {
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+  }
+
+  .project-question-number {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+  }
+
+  .project-question-label {
+    font-size: 16px;
+    line-height: 1.15;
+  }
+
+  .project-question-label::after {
+    margin-top: 7px;
+  }
+
+  .project-step[data-step="4"] .project-question {
+    margin-bottom: 20px;
+  }
+
+  .project-step[data-step="4"] .project-helper {
+    margin: 0 0 18px;
+  }
+
+}
