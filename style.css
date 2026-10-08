@@ -34,7 +34,23 @@ body {
   min-width: 0;
   overflow-x: hidden;
 
-  background: var(--grey);
+  background-color: var(--grey);
+
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(0, 0, 0, .055) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, .055) 1px,
+      transparent 1px
+    );
+
+  background-size: 40px 40px;
+  background-position: 0 0;
+
   color: var(--black);
 
   font-family:
@@ -42,7 +58,7 @@ body {
     Arial,
     Helvetica,
     sans-serif;
-}
+         }
 
 a {
   color: inherit;
