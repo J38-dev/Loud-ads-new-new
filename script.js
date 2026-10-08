@@ -18,69 +18,29 @@ const mobileMenu = document.querySelector("#mobileMenu");
 
 /* =========================================================
    HERO SCROLL INTERACTION
-========================================================= */
+ */
 
 function updateHeroScroll() {
 
-  if (!hero || !heroGrid) return;
-
-  const rect =
-    hero.getBoundingClientRect();
-
-  const heroHeight =
-    hero.offsetHeight;
-
-  const scrolled =
-    Math.min(
-      Math.max(-rect.top, 0),
-      heroHeight
-    );
-
-  const progress =
-    heroHeight > 0
-      ? scrolled / heroHeight
-      : 0;
-
-
-  /* GRID MOVEMENT */
+  if (!hero) return;
 
   const gridY =
-    progress * 35;
+    window.scrollY * 0.12;
 
-  heroGrid.style.setProperty(
-    "--grid-y",
+  document.body.style.setProperty(
+    "--site-grid-y",
     `${gridY}px`
   );
 
+   }
 
-  /* RED GRID GLOW */
-
-  const glow =
-    Math.min(progress * 2.2, .75);
-
-  const glowY =
-    35 + (progress * 65);
-
-  heroGrid.style.setProperty(
-    "--glow-opacity",
-    glow
-  );
-
-  heroGrid.style.setProperty(
-    "--glow-y",
-    `${glowY}%`
-  );
-
-}
-
-window.addEventListener(
+  window.addEventListener(
   "scroll",
   updateHeroScroll,
   { passive: true }
 );
 
 updateHeroScroll();
-
 
 /* =========================================================
    HERO MOUSE MOVEMENT
@@ -134,12 +94,12 @@ if (
       );
 
 
-      /* GRID MOVEMENT */
+      /* SITE-WIDE GRID MOVEMENT */
 
-      heroGrid.style.setProperty(
-        "--grid-x",
-        `${x * 14}px`
-      );
+document.body.style.setProperty(
+  "--site-grid-x",
+  `${x * 14}px`
+);
 
 
       /* POINTER POSITION */
@@ -218,10 +178,10 @@ if (
         "0px"
       );
 
-      heroGrid.style.setProperty(
-        "--grid-x",
-        "0px"
-      );
+      document.body.style.setProperty(
+  "--site-grid-x",
+  "0px"
+);
 
       hero.style.setProperty(
         "--pointer-x",
