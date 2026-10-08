@@ -18,11 +18,13 @@ const mobileMenu = document.querySelector("#mobileMenu");
 
 /* =========================================================
    HERO SCROLL INTERACTION
- */
+========================================================= */
 
 function updateHeroScroll() {
 
-  if (!hero) return;
+  if (!hero || !heroGrid) return;
+
+  /* SITE-WIDE GRID MOVEMENT */
 
   const gridY =
     window.scrollY * 0.12;
@@ -32,16 +34,52 @@ function updateHeroScroll() {
     `${gridY}px`
   );
 
-   }
 
-  window.addEventListener(
+  /* HERO RED GLOW */
+
+  const rect =
+    hero.getBoundingClientRect();
+
+  const heroHeight =
+    hero.offsetHeight;
+
+  const scrolled =
+    Math.min(
+      Math.max(-rect.top, 0),
+      heroHeight
+    );
+
+  const progress =
+    heroHeight > 0
+      ? scrolled / heroHeight
+      : 0;
+
+
+  const glow =
+    Math.min(progress * 2.2, .75);
+
+  const glowY =
+    35 + (progress * 65);
+
+  heroGrid.style.setProperty(
+    "--glow-opacity",
+    glow
+  );
+
+  heroGrid.style.setProperty(
+    "--glow-y",
+    `${glowY}%`
+  );
+
+}
+
+window.addEventListener(
   "scroll",
   updateHeroScroll,
   { passive: true }
 );
 
 updateHeroScroll();
-
 /* =========================================================
    HERO MOUSE MOVEMENT
 ========================================================= */
