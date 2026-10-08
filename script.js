@@ -432,6 +432,8 @@ document.addEventListener("DOMContentLoaded", () => {
     [...project.querySelectorAll("#projectBudget .project-choice")];
 
   const projectStart = project.querySelector("#projectStart");
+  const projectSubmit =
+  project.querySelector("#projectSubmit");
 
   const state = {
     service: "",
@@ -905,6 +907,52 @@ if (styleGroup) {
       encodeURIComponent(message);
 
   }
+
+
+
+/* =========================================================
+   STEP 05 — SEND PROJECT TO WHATSAPP
+========================================================= */
+
+if (projectSubmit) {
+
+  projectSubmit.addEventListener("click", () => {
+
+    state.idea =
+      idea?.value.trim() || "";
+
+    const message = [
+      "Hi Loud Ads, I'd like to start a project.",
+      "",
+      "PROJECT BRIEF",
+      "--------------------",
+      `Service: ${state.service || "Not selected"}`,
+      `Project: ${state.type || "Not selected"}`,
+      `Goal: ${state.goal || "Not selected"}`,
+      `Direction: ${
+        state.styles.length
+          ? state.styles.join(", ")
+          : "Not selected"
+      }`,
+      "",
+      "WHAT'S IN MY HEAD",
+      state.idea ||
+        "I don't have a specific idea yet. I'd like help figuring out the direction."
+    ].join("\n");
+
+    const whatsappURL =
+      "https://wa.me/27711507774?text=" +
+      encodeURIComponent(message);
+
+    window.open(
+      whatsappURL,
+      "_blank",
+      "noopener,noreferrer"
+    );
+
+  });
+
+}
 
 
   /* =========================================================
