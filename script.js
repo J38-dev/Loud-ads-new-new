@@ -953,6 +953,45 @@ if (projectSubmit) {
 }
 
 
+/* =========================================================
+   SECTION 03 — SELECTED WORK
+========================================================= */
+
+const workFilters = document.querySelectorAll(".work-filter");
+const workCards = document.querySelectorAll(".work-card");
+
+workFilters.forEach(filter => {
+
+  filter.addEventListener("click", () => {
+
+    const selectedCategory = filter.dataset.filter;
+
+    /* Active button */
+
+    workFilters.forEach(button => {
+      button.classList.remove("active");
+    });
+
+    filter.classList.add("active");
+
+
+    /* Show matching projects */
+
+    workCards.forEach(card => {
+
+      if (card.dataset.category === selectedCategory) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+
+    });
+
+  });
+
+});
+
+
   /* =========================================================
      INITIAL STATE
      IMPORTANT: DO NOT SCROLL HERE
@@ -961,3 +1000,4 @@ if (projectSubmit) {
   showStep(1);
 
 });
+
