@@ -1008,3 +1008,242 @@ showWork("web");
 
 });
 
+
+
+
+
+/* =========================================================
+   SECTION 04 — WHY LOUD ADS
+========================================================= */
+
+
+/* =========================================================
+   WHY ACCORDION
+========================================================= */
+
+const whyItems = document.querySelectorAll(".why-item");
+const whyAnswers = document.querySelectorAll(".why-answer");
+
+whyItems.forEach((item, index) => {
+
+  item.addEventListener("click", function () {
+
+    const answer = whyAnswers[index];
+    const isActive = item.classList.contains("active");
+
+
+    /* Close everything */
+
+    whyItems.forEach(button => {
+      button.classList.remove("active");
+
+      const icon = button.querySelector(".why-icon");
+
+      if (icon) {
+        icon.textContent = "+";
+      }
+    });
+
+    whyAnswers.forEach(answer => {
+      answer.classList.remove("active");
+    });
+
+
+    /* Open selected item */
+
+    if (!isActive) {
+
+      item.classList.add("active");
+      answer.classList.add("active");
+
+      const icon = item.querySelector(".why-icon");
+
+      if (icon) {
+        icon.textContent = "−";
+      }
+
+    }
+
+  });
+
+});
+
+
+/* =========================================================
+   PICK YOUR PROBLEM
+========================================================= */
+
+const problemOptions = document.querySelectorAll(".problem-option");
+const problemResponse = document.querySelector(".problem-response-text");
+
+const problemMessages = {
+
+  brand:
+    "Your brand needs a visual refresh. Start with a stronger identity, better design and a look that matches where your business is going.",
+
+  website:
+    "Your website should work like your best salesperson. Start with a clearer structure, stronger visuals and a simple path for people to take action.",
+
+  attention:
+    "If people aren't noticing you, your brand needs more visual impact. Stronger design and better digital presence can help you stand out.",
+
+  design:
+    "Let's improve the way your business looks. From social graphics to promotional material, better design can make your brand feel more professional."
+};
+
+
+problemOptions.forEach(option => {
+
+  option.addEventListener("click", function () {
+
+    const problem = this.dataset.problem;
+
+    problemOptions.forEach(button => {
+      button.classList.remove("active");
+    });
+
+    this.classList.add("active");
+
+    if (problemMessages[problem]) {
+      problemResponse.textContent = problemMessages[problem];
+    }
+
+  });
+
+});
+
+
+/* =========================================================
+   LOUDNESS METER
+========================================================= */
+
+const loudMeter = document.querySelector(".loud-meter");
+const loudMeterTrack = document.querySelector(".loud-meter-track");
+const loudMeterFill = document.querySelector(".loud-meter-fill");
+const loudMeterDot = document.querySelector(".loud-meter-dot");
+const loudMeterResult = document.querySelector(".loud-meter-result strong");
+const loudMeterText = document.querySelector(".loud-meter-result p");
+
+
+if (loudMeter && loudMeterTrack) {
+
+  let meterActive = false;
+
+
+  function updateLoudMeter(clientX) {
+
+    const rect = loudMeterTrack.getBoundingClientRect();
+
+    let percentage =
+      ((clientX - rect.left) / rect.width) * 100;
+
+    percentage = Math.max(0, Math.min(100, percentage));
+
+
+    loudMeterFill.style.width = percentage + "%";
+    loudMeterDot.style.left = percentage + "%";
+
+
+    if (percentage < 25) {
+
+      loudMeterResult.textContent = "YOUR BRAND IS TOO QUIET";
+
+      loudMeterText.textContent =
+        "Your business may be getting overlooked. Start by making your visual identity clearer and more noticeable.";
+
+    } else if (percentage < 50) {
+
+      loudMeterResult.textContent = "START MAKING SOME NOISE";
+
+      loudMeterText.textContent =
+        "You've got something there. Now let's give your brand more presence and consistency.";
+
+    } else if (percentage < 75) {
+
+      loudMeterResult.textContent = "NOW PEOPLE ARE LOOKING";
+
+      loudMeterText.textContent =
+        "Your brand is starting to stand out. Strong design and a better digital presence can push it further.";
+
+    } else {
+
+      loudMeterResult.textContent = "THAT'S LOUD";
+
+      loudMeterText.textContent =
+        "Your brand is demanding attention. Let's turn that attention into real action.";
+
+    }
+
+  }
+
+
+  function startMeter(clientX) {
+
+    meterActive = true;
+    updateLoudMeter(clientX);
+
+  }
+
+
+  function moveMeter(clientX) {
+
+    if (!meterActive) return;
+
+    updateLoudMeter(clientX);
+
+  }
+
+
+  function stopMeter() {
+
+    meterActive = false;
+
+  }
+
+
+  /* Desktop */
+
+  loudMeterTrack.addEventListener("mousedown", function (event) {
+
+    startMeter(event.clientX);
+
+  });
+
+  document.addEventListener("mousemove", function (event) {
+
+    moveMeter(event.clientX);
+
+  });
+
+  document.addEventListener("mouseup", function () {
+
+    stopMeter();
+
+  });
+
+
+  /* Mobile */
+
+  loudMeterTrack.addEventListener("touchstart", function (event) {
+
+    startMeter(event.touches[0].clientX);
+
+  }, { passive: true });
+
+
+  document.addEventListener("touchmove", function (event) {
+
+    if (!meterActive) return;
+
+    updateLoudMeter(event.touches[0].clientX);
+
+  }, { passive: true });
+
+
+  document.addEventListener("touchend", function () {
+
+    stopMeter();
+
+  });
+
+    }
