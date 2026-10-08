@@ -1006,11 +1006,9 @@ position: relative;
   position: relative;
   width: 100%;
   overflow: hidden;
-  background:
-    linear-gradient(rgba(0,0,0,.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,.045) 1px, transparent 1px);
-  background-size: 40px 40px;
-  background-color: #f7f7f7;
+
+  background: transparent;
+
   border-top: 1px solid rgba(0,0,0,.1);
 }
 
