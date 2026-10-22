@@ -1291,3 +1291,35 @@ if (reviewGroups.length === 1) {
 reviewsTrack.dataset.loopInitialized = "true";
 
 });
+
+
+
+/* ==========================================
+LOUD ADS — TRUST SECTION
+Safe, isolated functionality
+========================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+const trustSection = document.querySelector("#trusted-by");
+
+if (!trustSection) return;
+
+const logoImages = trustSection.querySelectorAll(".trust-logo img");
+
+logoImages.forEach(function (img) {
+    // Add a class when the logo loads successfully.
+    if (img.complete && img.naturalWidth > 0) {
+        img.classList.add("logo-loaded");
+    } else {
+        img.addEventListener("load", function () {
+            img.classList.add("logo-loaded");
+        }, { once: true });
+    }
+
+    // Identify missing logo files without breaking the section.
+    img.addEventListener("error", function () {
+        console.warn("Loud Ads: Could not load logo:", img.getAttribute("src"));
+    }, { once: true });
+});
+
+});
