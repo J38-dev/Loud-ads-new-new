@@ -1247,3 +1247,47 @@ if (loudMeter && loudMeterTrack) {
   });
 
     }
+
+
+/* ==========================================
+LOUD ADS — REVIEWS SECTION
+Creates a seamless, continuous review loop.
+Does not modify other website sections.
+========================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+const reviewsSection = document.querySelector(".reviews-section#reviews");
+
+if (!reviewsSection) return;
+
+const reviewsTrack = reviewsSection.querySelector(".reviews-track");
+
+if (!reviewsTrack) {
+    console.warn("Loud Ads: Reviews track not found.");
+    return;
+}
+
+const reviewGroups = reviewsTrack.querySelectorAll(".reviews-group");
+
+if (reviewGroups.length === 0) {
+    console.warn("Loud Ads: No review groups found.");
+    return;
+}
+
+// Prevent the script from duplicating reviews repeatedly.
+if (reviewsTrack.dataset.loopInitialized === "true") return;
+
+// Two identical groups are needed for the seamless CSS animation.
+if (reviewGroups.length === 1) {
+    const originalGroup = reviewGroups[0];
+    const clonedGroup = originalGroup.cloneNode(true);
+
+    clonedGroup.setAttribute("aria-hidden", "true");
+
+    reviewsTrack.appendChild(clonedGroup);
+}
+
+// Mark the loop as initialized.
+reviewsTrack.dataset.loopInitialized = "true";
+
+});
