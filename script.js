@@ -1323,3 +1323,35 @@ logoImages.forEach(function (img) {
 });
 
 });
+
+
+
+/* ==========================================
+LOUD ADS — FOOTER
+Isolated functionality only
+========================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+const footer = document.querySelector("#site-footer");
+
+if (!footer) return;
+
+// Smoothly scroll to the top when Back to Top is clicked.
+const backToTop = footer.querySelector(".la-footer__back-top");
+
+if (backToTop) {
+    backToTop.addEventListener("click", function (event) {
+        const target = document.querySelector("#top");
+
+        if (target) {
+            event.preventDefault();
+
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+    });
+}
+
+});
